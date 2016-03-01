@@ -53,6 +53,14 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         if (self.parallaxNode.convertToWorldSpace(self.spaceBg.position).y < -self.spaceBg.contentSize.height) {
             self.parallaxNode.position = CGPointMake(0.0, 0.0)
         }
+        //tamanho da tela para movimentacao
+        if(heroShip.position.x <= 0){
+            heroShip.position.x = 7
+            stopAllActions()
+        }else if(heroShip.position.x >= 768){
+            heroShip.position.x = 755
+            stopAllActions()
+        }
         
         // Controla os diparos da nave
         if (self.isTouching) {
@@ -335,14 +343,18 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         if (self.canPlay) {
             self.isTouching = true
             let locationInView:CGPoint = CCDirector.sharedDirector().convertTouchToGL(touch)
-            self.heroShip.position = locationInView
+            //self.heroShip.position = locationInView
+            let move:CCAction = CCActionMoveTo.actionWithDuration(0.4, position: CGPointMake(locationInView.x,
+                heroShip.position.y)) as! CCAction
+            heroFire()
+            heroShip.runAction(move)
         }
     }
     
     override func touchMoved(touch: UITouch!, withEvent event: UIEvent!) {
         if (self.canPlay && self.isTouching) {
             let locationInView:CGPoint = CCDirector.sharedDirector().convertTouchToGL(touch)
-            self.heroShip.position = locationInView
+            self.heroShip.position.x = locationInView.x
         }
     }
     
