@@ -8,7 +8,7 @@
 // MARK: - Class Definition
 class PlayerShip : CCSprite {
 	// MARK: - Public Objects
-	var atackSpeed:CGFloat = 10.0
+	var atackSpeed:CGFloat = 5.0
 	var life:CGFloat = 100.0
 
 	// MARK: - Private Objects

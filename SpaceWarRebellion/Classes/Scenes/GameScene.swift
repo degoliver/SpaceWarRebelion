@@ -109,11 +109,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         leftShot.position = CGPointMake(self.heroShip.position.x - 45.0, self.heroShip.position.y + 50.0)
         rightShot.position = CGPointMake(self.heroShip.position.x + 45.0, self.heroShip.position.y + 50.0)
         
-        leftShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.8, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
+        leftShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
             leftShot.removeFromParentAndCleanup(true)
         }) as! CCActionFiniteTime) as! CCAction)
         
-        rightShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.8, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
+        rightShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
             rightShot.removeFromParentAndCleanup(true)
         }) as! CCActionFiniteTime) as! CCAction)
         
