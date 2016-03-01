@@ -191,6 +191,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         
         let positionX:CGFloat = minScreenX + CGFloat(arc4random_uniform(maxScreenX))
         asteroid.position = CGPointMake(positionX, screenSize.height + asteroid.boundingBox().size.height)
+        let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
+        asteroid.runAction(rotate)
         self.physicsWorld.addChild(asteroid, z:ObjectsLayers.Foes.rawValue)
         
         let asteroidSped:CCTime = CCTime(arc4random_uniform(16)) + 5.0 // De 15s a 20s
