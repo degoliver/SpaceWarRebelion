@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Class Definition
-class GameScene: CCScene, CCPhysicsCollisionDelegate {
+class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate {
     private let screenSize:CGSize = CCDirector.sharedDirector().viewSize()
     var canPlay:Bool = true
     var isTouching:Bool = false
@@ -34,6 +34,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
 		super.init()
         self.userInteractionEnabled = true
         self.createSceneObjects()
+        self.registerGestures()
 	}
 
 	override func onEnter() {
@@ -105,6 +106,16 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
 //            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ButtonTap)
 //        }
 //        self.addChild(backButton, z:ObjectsLayers.HUD.rawValue)
+        
+        // Back button
+        let aShield:CCButton = CCButton(title: "[ Shield]", fontName: "Verdana-Bold", fontSize: 32.0)
+        aShield.position = CGPointMake(1.0, 1.0)
+        aShield.anchorPoint = CGPointMake(0.5, 0.5)
+        aShield.zoomWhenHighlighted = false
+        aShield.block = {_ in
+            self.heroShip.activeShield()
+        }
+        self.addChild(aShield, z:ObjectsLayers.HUD.rawValue)
         
         // Configura o parallax infinito
         self.spaceBg.position = CGPointMake(0.0, 0.0)
@@ -374,6 +385,30 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
             heroLife25.removeFromParentAndCleanup(true)
         }
     }
+    
+    //registra os gestures usadosna gameScene
+    func registerGestures(){
+        let swipDowm: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handlePlayerSwipe:")
+        swipDowm.direction = UISwipeGestureRecognizerDirection.Down
+        swipDowm.delegate = self
+        CCDirector.sharedDirector().view.addGestureRecognizer(swipDowm)
+    }
+    
+    //controle os getures da tela.
+    func handlePlayerSwipe(recognizer: UISwipeGestureRecognizer){
+        if(self.canPlay){
+            if(recognizer.state == .Ended){
+                switch(recognizer.direction){
+                case UISwipeGestureRecognizerDirection.Down:
+                    heroShip.activeShield()
+                    break
+                default:
+                    debugPrint("Direção não tratada")
+                    break
+                }
+            }
+        }
+    }
 
     override func touchBegan(touch: UITouch!, withEvent event: UIEvent!) {
         if (self.canPlay) {
@@ -407,4 +442,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         
         CCTextureCache.sharedTextureCache().removeAllTextures()
 	}
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
