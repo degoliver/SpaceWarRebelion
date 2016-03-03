@@ -28,7 +28,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     var lasermin1:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
     var lasermin2:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
     var lasermin3:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
-
+    
+    //boss
+    var boss: BossShip = BossShip(imageNamed: "boss.png")
     
 	override init() {
 		super.init()
@@ -130,6 +132,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         // Configura o heroi na tela
         self.heroShip.position = CGPointMake(screenSize.width/2.0, 100.0)
         self.physicsWorld.addChild(self.heroShip, z:ObjectsLayers.Player.rawValue)
+        
+        //Configura o BOSS
+        self.boss.position = CGPointMake(self.screenSize.width/2,800)
+        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
+        //self.boss.visible = false gerar na classe BossShip
     }
     
     func heroFire() {
@@ -369,6 +376,23 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         self.addChild(lasermin1, z:ObjectsLayers.HUD.rawValue)
  
     return true
+    }
+    
+    //valida colisao entre a o tiro da nave e o Boss
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
+        boss.life -= aPlayerShot.damage
+        
+        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+        if boss.life <= 0{
+            boss.life = 0
+            // boss desaparece
+            boss.removeFromParentAndCleanup(true)
+        }else{
+            // mudar a cor do boss
+        }
+        aPlayerShot.removeFromParentAndCleanup(true)
+        
+        return true
     }
     
     func updateHeroLife(lifeHero:CGFloat){

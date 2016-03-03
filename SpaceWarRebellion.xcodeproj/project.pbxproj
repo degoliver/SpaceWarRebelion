@@ -226,6 +226,16 @@
 		2C2AF3A11C83EF5B00D2C59D /* laserBallRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF39F1C83EF5B00D2C59D /* laserBallRed.png */; };
 		2C2AF3A31C83FA1A00D2C59D /* enemyShip1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF3A21C83FA1A00D2C59D /* enemyShip1.png */; };
 		2C2AF3A71C8406C400D2C59D /* heroShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF3A61C8406C400D2C59D /* heroShot.png */; };
+		A0DB55251C87E921003C9EBC /* particleTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55221C87E921003C9EBC /* particleTexture.png */; };
+		A0DB55261C87E921003C9EBC /* turbina1.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55231C87E921003C9EBC /* turbina1.plist */; };
+		A0DB55271C87E921003C9EBC /* turbina2.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55241C87E921003C9EBC /* turbina2.plist */; };
+		A0DB55291C87E95C003C9EBC /* heroShield.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55281C87E95C003C9EBC /* heroShield.png */; };
+		A0DB552C1C87EA75003C9EBC /* BossShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB552A1C87EA75003C9EBC /* BossShip.swift */; };
+		A0DB552D1C87EA75003C9EBC /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB552B1C87EA75003C9EBC /* Effect.swift */; };
+		A0DB55301C87EAE7003C9EBC /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB552E1C87EAE7003C9EBC /* boss.png */; };
+		A0DB55311C87EAE7003C9EBC /* collisionPlist.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */; };
+		A0DB55331C87EB02003C9EBC /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55321C87EB02003C9EBC /* explosion.png */; };
+		A0DB55351C87EB1A003C9EBC /* collision.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55341C87EB1A003C9EBC /* collision.plist */; };
 		AC1CA1EB1C87B8D700468091 /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1CA1EA1C87B8D700468091 /* Laser.swift */; };
 		AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F01C87C13D00468091 /* eject_01.png */; };
 		AC1CA1F51C87C3FA00468091 /* laserBallBlue_min.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */; };
@@ -658,6 +668,16 @@
 		2C2AF39F1C83EF5B00D2C59D /* laserBallRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallRed.png; sourceTree = "<group>"; };
 		2C2AF3A21C83FA1A00D2C59D /* enemyShip1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemyShip1.png; sourceTree = "<group>"; };
 		2C2AF3A61C8406C400D2C59D /* heroShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heroShot.png; sourceTree = "<group>"; };
+		A0DB55221C87E921003C9EBC /* particleTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particleTexture.png; sourceTree = "<group>"; };
+		A0DB55231C87E921003C9EBC /* turbina1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = turbina1.plist; sourceTree = "<group>"; };
+		A0DB55241C87E921003C9EBC /* turbina2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = turbina2.plist; sourceTree = "<group>"; };
+		A0DB55281C87E95C003C9EBC /* heroShield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heroShield.png; sourceTree = "<group>"; };
+		A0DB552A1C87EA75003C9EBC /* BossShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BossShip.swift; sourceTree = "<group>"; };
+		A0DB552B1C87EA75003C9EBC /* Effect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		A0DB552E1C87EAE7003C9EBC /* boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss.png; sourceTree = "<group>"; };
+		A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collisionPlist.png; sourceTree = "<group>"; };
+		A0DB55321C87EB02003C9EBC /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
+		A0DB55341C87EB1A003C9EBC /* collision.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = collision.plist; sourceTree = "<group>"; };
 		AC1CA1EA1C87B8D700468091 /* Laser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Laser.swift; sourceTree = "<group>"; };
 		AC1CA1F01C87C13D00468091 /* eject_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_01.png; sourceTree = "<group>"; };
 		AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallBlue_min.png; sourceTree = "<group>"; };
@@ -778,6 +798,7 @@
 		1293CCB219C08A25006A0E25 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A0DB55341C87EB1A003C9EBC /* collision.plist */,
 				2C2AF3781C83CBE800D2C59D /* Images */,
 				1255544819C0D85B00EC663C /* Images.xcassets */,
 				1226620E19F00CD6001FE3B9 /* DefaultParticleFire */,
@@ -1533,6 +1554,13 @@
 		2C2AF3781C83CBE800D2C59D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A0DB55321C87EB02003C9EBC /* explosion.png */,
+				A0DB552E1C87EAE7003C9EBC /* boss.png */,
+				A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */,
+				A0DB55281C87E95C003C9EBC /* heroShield.png */,
+				A0DB55221C87E921003C9EBC /* particleTexture.png */,
+				A0DB55231C87E921003C9EBC /* turbina1.plist */,
+				A0DB55241C87E921003C9EBC /* turbina2.plist */,
 				AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */,
 				AC1CA1F01C87C13D00468091 /* eject_01.png */,
 				2C2AF3A61C8406C400D2C59D /* heroShot.png */,
@@ -1558,6 +1586,8 @@
 		2C2AF3931C83EBE900D2C59D /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				A0DB552A1C87EA75003C9EBC /* BossShip.swift */,
+				A0DB552B1C87EA75003C9EBC /* Effect.swift */,
 				2C2AF3941C83EBE900D2C59D /* EnemyShip.swift */,
 				2C2AF3951C83EBE900D2C59D /* EnemyShot.swift */,
 				2C2AF3961C83EBE900D2C59D /* PlayerShip.swift */,
@@ -1652,33 +1682,37 @@
 				2C2AF3871C83CBE800D2C59D /* enemyShip.png in Resources */,
 				2C2AF3A11C83EF5B00D2C59D /* laserBallRed.png in Resources */,
 				2C2AF3721C83CBB800D2C59D /* FXShieldActivate.mp3 in Resources */,
+				A0DB55301C87EAE7003C9EBC /* boss.png in Resources */,
 				1255545119C0D90600EC663C /* Default.png in Resources */,
 				AC1CA1F51C87C3FA00468091 /* laserBallBlue_min.png in Resources */,
+				A0DB55331C87EB02003C9EBC /* explosion.png in Resources */,
+				A0DB55311C87EAE7003C9EBC /* collisionPlist.png in Resources */,
 				AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */,
 				2C2AF3A71C8406C400D2C59D /* heroShot.png in Resources */,
 				2C2AF38D1C83CBE800D2C59D /* starkiller.png in Resources */,
 				1255545219C0D90600EC663C /* Default@2x.png in Resources */,
 				2C2AF3761C83CBB800D2C59D /* FXShipBoom.wav in Resources */,
-				AC1CF1121C87B50500AF1C8D /* particleTexture.png in Resources */,
 				2C2AF3731C83CBB800D2C59D /* FXShieldActivate1.mp3 in Resources */,
+				A0DB55261C87E921003C9EBC /* turbina1.plist in Resources */,
 				2C2AF38E1C83CBE800D2C59D /* textGameOver.png in Resources */,
 				2C2AF3851C83CBE800D2C59D /* bgSpace.png in Resources */,
+				A0DB55251C87E921003C9EBC /* particleTexture.png in Resources */,
 				1255544919C0D85B00EC663C /* Images.xcassets in Resources */,
 				2C2AF38A1C83CBE800D2C59D /* enemyShip4.png in Resources */,
-				AC1CF1101C87B50500AF1C8D /* turbina1.plist in Resources */,
+				A0DB55291C87E95C003C9EBC /* heroShield.png in Resources */,
 				1255544F19C0D90600EC663C /* Default-568h@2x.png in Resources */,
 				2C2AF3881C83CBE800D2C59D /* enemyShip2.png in Resources */,
 				2C2AF3751C83CBB800D2C59D /* FXButtonTap.mp3 in Resources */,
 				1255545019C0D90600EC663C /* Default-Landscape~ipad.png in Resources */,
 				2C2AF3861C83CBE800D2C59D /* bgSpaceMain.png in Resources */,
 				2C2AF38C1C83CBE800D2C59D /* heroShip.png in Resources */,
-				AC1CF1111C87B50500AF1C8D /* turbina2.plist in Resources */,
 				2C2AF3841C83CBE800D2C59D /* asteroid.png in Resources */,
 				2C2AF3921C83E74600D2C59D /* heroShipLife.png in Resources */,
 				2C2AF3891C83CBE800D2C59D /* enemyShip3.png in Resources */,
 				2C2AF3771C83CBB800D2C59D /* MusicInGame.mp3 in Resources */,
 				2C2AF3A31C83FA1A00D2C59D /* enemyShip1.png in Resources */,
-				AC1CF10C1C87A3BB00AF1C8D /* heroShield.png in Resources */,
+				A0DB55351C87EB1A003C9EBC /* collision.plist in Resources */,
+				A0DB55271C87E921003C9EBC /* turbina2.plist in Resources */,
 				2C2AF3A01C83EF5B00D2C59D /* laserBallBlue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1764,6 +1798,7 @@
 				1293CDBF19C08A26006A0E25 /* CCTransition.m in Sources */,
 				12F88AE319DDA1D20001531E /* CCEffectGlass.m in Sources */,
 				1293CE1619C08A26006A0E25 /* OALActionManager.m in Sources */,
+				A0DB552C1C87EA75003C9EBC /* BossShip.swift in Sources */,
 				1293CD7A19C08A25006A0E25 /* CCPhysicsNode.m in Sources */,
 				12F88AEB19DDA1D20001531E /* CCEffectUtils.m in Sources */,
 				12F88AE719DDA1D20001531E /* CCEffectRefraction.m in Sources */,
@@ -1788,6 +1823,7 @@
 				1293CDC319C08A26006A0E25 /* cocos2d.m in Sources */,
 				1255543519C09CD200EC663C /* GameScene.swift in Sources */,
 				1293CD9B19C08A25006A0E25 /* CCSprite9Slice.m in Sources */,
+				A0DB552D1C87EA75003C9EBC /* Effect.swift in Sources */,
 				AC1CA1EB1C87B8D700468091 /* Laser.swift in Sources */,
 				1293CDDB19C08A26006A0E25 /* CCDirectorMac.m in Sources */,
 				1293CE7119C08A26006A0E25 /* CCControl.m in Sources */,

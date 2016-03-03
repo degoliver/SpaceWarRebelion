@@ -57,7 +57,7 @@ class PlayerShot : CCSprite {
 		self.physicsBody.density = 100.0
 		self.physicsBody.collisionType = "PlayerShot"
 		self.physicsBody.collisionCategories = ["PlayerShot"]
-		self.physicsBody.collisionMask = ["EnemyShip", "Asteroid", "EnemyShot"]
+		self.physicsBody.collisionMask = ["EnemyShip", "Asteroid", "EnemyShot","BossShip"]
 	}
 
 	override func onEnter() {
