@@ -28,7 +28,7 @@ class LoadingScene : CCScene {
         self.addChild(label)
         
         DelayHelper.sharedInstance.callBlock({ _ in
-            StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
+            StateMachine.sharedInstance.changeScene(StateMachineScenes.FirstIntroScene, isFade:true)
             }, withDelay: 1.0)
     }
 

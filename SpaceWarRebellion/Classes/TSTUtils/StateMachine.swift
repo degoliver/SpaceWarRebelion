@@ -11,6 +11,9 @@ enum StateMachineScenes {
 	case LoadScene
 	case HomeScene
 	case GameScene
+    case FirstIntroScene
+    case SecondIntroScene
+    case ThirdIntroScene
 };
 
 class StateMachine {
@@ -41,6 +44,12 @@ class StateMachine {
 			return HomeScene()
 		case StateMachineScenes.GameScene:
 			return GameScene()
+        case StateMachineScenes.FirstIntroScene:
+            return FirstIntroScene()
+        case StateMachineScenes.SecondIntroScene:
+            return SecondIntroScene()
+        case StateMachineScenes.ThirdIntroScene:
+            return ThirdIntroScene()
 		default:
 			return CCScene()
 		}
@@ -56,11 +65,16 @@ class StateMachine {
 		// Configura a proxima cena a ser executada
 		let newScene:CCScene = retrieveScene(scene)
 
-		// Controle para tocar a musica apenas na GameScene
-		SoundPlayHelper.sharedInstance.stopAllSounds()
-		if (currentScene.isKindOfClass(HomeScene) && newScene.isKindOfClass(GameScene)) {
-			SoundPlayHelper.sharedInstance.playMusicWithControl(GameMusicAndSoundFx.MusicInGame, withLoop:true)
-		}
+        // Controle para tocar a musica apenas na GameScene
+        if(newScene.isKindOfClass(HomeScene) || newScene.isKindOfClass(GameScene)) {
+            SoundPlayHelper.sharedInstance.stopAllSounds()
+        }
+        if (newScene.isKindOfClass(GameScene)) {
+            SoundPlayHelper.sharedInstance.playMusicWithControl(GameMusicAndSoundFx.MusicInGame, withLoop:true)
+        }
+        else if(newScene.isKindOfClass(FirstIntroScene)) {
+            SoundPlayHelper.sharedInstance.playMusicWithControl(GameMusicAndSoundFx.MusicIntro, withLoop:true)
+        }
 
 		return newScene
 	}

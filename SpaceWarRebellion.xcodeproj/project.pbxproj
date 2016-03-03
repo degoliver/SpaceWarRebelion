@@ -198,6 +198,13 @@
 		12F88AE919DDA1D20001531E /* CCEffectSaturation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F88AD719DDA1D20001531E /* CCEffectSaturation.m */; };
 		12F88AEA19DDA1D20001531E /* CCEffectStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F88ADA19DDA1D20001531E /* CCEffectStack.m */; };
 		12F88AEB19DDA1D20001531E /* CCEffectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F88ADD19DDA1D20001531E /* CCEffectUtils.m */; };
+		15EEE1821C88E7010061192E /* FirstIntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEE1811C88E7010061192E /* FirstIntroScene.swift */; };
+		15EEE1841C88E72A0061192E /* SecondIntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEE1831C88E72A0061192E /* SecondIntroScene.swift */; };
+		15EEE1861C88E74B0061192E /* ThirdIntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEE1851C88E74B0061192E /* ThirdIntroScene.swift */; };
+		15EEE18A1C88E8BA0061192E /* firstIntro.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE1871C88E8BA0061192E /* firstIntro.png */; };
+		15EEE18B1C88E8BA0061192E /* secondIntro.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE1881C88E8BA0061192E /* secondIntro.png */; };
+		15EEE18C1C88E8BA0061192E /* thirdIntro.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE1891C88E8BA0061192E /* thirdIntro.jpg */; };
+		15EEE18E1C88E8D30061192E /* MusicIntro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE18D1C88E8D30061192E /* MusicIntro.mp3 */; };
 		2C2AF3721C83CBB800D2C59D /* FXShieldActivate.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36C1C83CBB800D2C59D /* FXShieldActivate.mp3 */; };
 		2C2AF3731C83CBB800D2C59D /* FXShieldActivate1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36D1C83CBB800D2C59D /* FXShieldActivate1.mp3 */; };
 		2C2AF3741C83CBB800D2C59D /* FXHeroLazerShot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36E1C83CBB800D2C59D /* FXHeroLazerShot.mp3 */; };
@@ -640,6 +647,13 @@
 		12F88ADB19DDA1D20001531E /* CCEffectStackProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEffectStackProtocol.h; path = Libraries/cocos2d/CCEffectStackProtocol.h; sourceTree = "<group>"; };
 		12F88ADC19DDA1D20001531E /* CCEffectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCEffectUtils.h; path = Libraries/cocos2d/CCEffectUtils.h; sourceTree = "<group>"; };
 		12F88ADD19DDA1D20001531E /* CCEffectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCEffectUtils.m; path = Libraries/cocos2d/CCEffectUtils.m; sourceTree = "<group>"; };
+		15EEE1811C88E7010061192E /* FirstIntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstIntroScene.swift; sourceTree = "<group>"; };
+		15EEE1831C88E72A0061192E /* SecondIntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondIntroScene.swift; sourceTree = "<group>"; };
+		15EEE1851C88E74B0061192E /* ThirdIntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdIntroScene.swift; sourceTree = "<group>"; };
+		15EEE1871C88E8BA0061192E /* firstIntro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstIntro.png; sourceTree = "<group>"; };
+		15EEE1881C88E8BA0061192E /* secondIntro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = secondIntro.png; sourceTree = "<group>"; };
+		15EEE1891C88E8BA0061192E /* thirdIntro.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thirdIntro.jpg; sourceTree = "<group>"; };
+		15EEE18D1C88E8D30061192E /* MusicIntro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MusicIntro.mp3; sourceTree = "<group>"; };
 		2C2AF36C1C83CBB800D2C59D /* FXShieldActivate.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXShieldActivate.mp3; sourceTree = "<group>"; };
 		2C2AF36D1C83CBB800D2C59D /* FXShieldActivate1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXShieldActivate1.mp3; sourceTree = "<group>"; };
 		2C2AF36E1C83CBB800D2C59D /* FXHeroLazerShot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXHeroLazerShot.mp3; sourceTree = "<group>"; };
@@ -735,6 +749,9 @@
 				1255543419C09CD200EC663C /* LoadingScene.swift */,
 				1255543319C09CD200EC663C /* HomeScene.swift */,
 				1255543219C09CD200EC663C /* GameScene.swift */,
+				15EEE1811C88E7010061192E /* FirstIntroScene.swift */,
+				15EEE1831C88E72A0061192E /* SecondIntroScene.swift */,
+				15EEE1851C88E74B0061192E /* ThirdIntroScene.swift */,
 			);
 			name = Scenes;
 			path = Classes/Scenes;
@@ -748,6 +765,7 @@
 				2C2AF36E1C83CBB800D2C59D /* FXHeroLazerShot.mp3 */,
 				2C2AF36F1C83CBB800D2C59D /* FXButtonTap.mp3 */,
 				2C2AF3701C83CBB800D2C59D /* FXShipBoom.wav */,
+				15EEE18D1C88E8D30061192E /* MusicIntro.mp3 */,
 				2C2AF3711C83CBB800D2C59D /* MusicInGame.mp3 */,
 			);
 			name = "Musics and SoundsFX";
@@ -1554,6 +1572,9 @@
 		2C2AF3781C83CBE800D2C59D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				15EEE1871C88E8BA0061192E /* firstIntro.png */,
+				15EEE1881C88E8BA0061192E /* secondIntro.png */,
+				15EEE1891C88E8BA0061192E /* thirdIntro.jpg */,
 				A0DB55321C87EB02003C9EBC /* explosion.png */,
 				A0DB552E1C87EAE7003C9EBC /* boss.png */,
 				A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */,
@@ -1678,11 +1699,14 @@
 			files = (
 				2C2AF38B1C83CBE800D2C59D /* enemyShip5.png in Resources */,
 				2C2AF3741C83CBB800D2C59D /* FXHeroLazerShot.mp3 in Resources */,
+				15EEE18B1C88E8BA0061192E /* secondIntro.png in Resources */,
+				15EEE18C1C88E8BA0061192E /* thirdIntro.jpg in Resources */,
 				1226621019F00CD6001FE3B9 /* fire.png in Resources */,
 				2C2AF3871C83CBE800D2C59D /* enemyShip.png in Resources */,
 				2C2AF3A11C83EF5B00D2C59D /* laserBallRed.png in Resources */,
 				2C2AF3721C83CBB800D2C59D /* FXShieldActivate.mp3 in Resources */,
 				A0DB55301C87EAE7003C9EBC /* boss.png in Resources */,
+				15EEE18A1C88E8BA0061192E /* firstIntro.png in Resources */,
 				1255545119C0D90600EC663C /* Default.png in Resources */,
 				AC1CA1F51C87C3FA00468091 /* laserBallBlue_min.png in Resources */,
 				A0DB55331C87EB02003C9EBC /* explosion.png in Resources */,
@@ -1698,6 +1722,7 @@
 				2C2AF3851C83CBE800D2C59D /* bgSpace.png in Resources */,
 				A0DB55251C87E921003C9EBC /* particleTexture.png in Resources */,
 				1255544919C0D85B00EC663C /* Images.xcassets in Resources */,
+				15EEE18E1C88E8D30061192E /* MusicIntro.mp3 in Resources */,
 				2C2AF38A1C83CBE800D2C59D /* enemyShip4.png in Resources */,
 				A0DB55291C87E95C003C9EBC /* heroShield.png in Resources */,
 				1255544F19C0D90600EC663C /* Default-568h@2x.png in Resources */,
@@ -1736,6 +1761,7 @@
 				1293CDDE19C08A26006A0E25 /* CCGLView.m in Sources */,
 				1293CDD119C08A26006A0E25 /* CCGLView.m in Sources */,
 				1293CE2919C08A26006A0E25 /* OALSimpleAudio.m in Sources */,
+				15EEE1841C88E72A0061192E /* SecondIntroScene.swift in Sources */,
 				1255543B19C0C3B100EC663C /* DelayHelper.swift in Sources */,
 				1293CD9119C08A25006A0E25 /* CCScene.m in Sources */,
 				1293CDB919C08A26006A0E25 /* CCTiledMapObjectGroup.m in Sources */,
@@ -1758,6 +1784,7 @@
 				1293CDF319C08A26006A0E25 /* ccUtils.c in Sources */,
 				1293CD5019C08A25006A0E25 /* CCLayoutBox.m in Sources */,
 				1293CDA919C08A25006A0E25 /* CCTexture.m in Sources */,
+				15EEE1821C88E7010061192E /* FirstIntroScene.swift in Sources */,
 				1293CDFB19C08A26006A0E25 /* CGPointExtension.m in Sources */,
 				1255543619C09CD200EC663C /* HomeScene.swift in Sources */,
 				12F88ABE19DDA1620001531E /* CCNoARC.m in Sources */,
@@ -1827,6 +1854,7 @@
 				AC1CA1EB1C87B8D700468091 /* Laser.swift in Sources */,
 				1293CDDB19C08A26006A0E25 /* CCDirectorMac.m in Sources */,
 				1293CE7119C08A26006A0E25 /* CCControl.m in Sources */,
+				15EEE1861C88E74B0061192E /* ThirdIntroScene.swift in Sources */,
 				1293CD6B19C08A25006A0E25 /* CCParticleSystem.m in Sources */,
 				1293CD6719C08A25006A0E25 /* CCParticleExamples.m in Sources */,
 				1293CD3319C08A25006A0E25 /* CCConfiguration.m in Sources */,

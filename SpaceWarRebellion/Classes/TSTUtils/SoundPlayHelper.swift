@@ -9,6 +9,7 @@ import Foundation
 
 enum GameMusicAndSoundFx:String {
 	case MusicInGame = "MusicInGame.mp3"
+    case MusicIntro = "MusicIntro.mp3"
 	case ButtonTap = "FXButtonTap.mp3"
     case ActiveShield = "FXShieldActivate.mp3"
     case ActiveShield2 = "FXShieldActivate1.mp3"
@@ -45,7 +46,7 @@ class SoundPlayHelper {
 		OALSimpleAudio.sharedInstance().preloadCacheEnabled = true
 
 		// Apenas uma musica de fundo pode ser cacheada
-		OALSimpleAudio.sharedInstance().preloadBg(GameMusicAndSoundFx.MusicInGame.rawValue)
+		OALSimpleAudio.sharedInstance().preloadBg(GameMusicAndSoundFx.MusicIntro.rawValue)
 
 		// Itera todos os SoundsFX para cachear
 		for music in GameMusicAndSoundFx.allSoundFx {
