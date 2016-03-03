@@ -24,6 +24,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
     var heroLife75:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife50:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife25:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
+    var laser:Laser = Laser(imageNamed: "laserBallBlue.png")
+    var lasermin1:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
+    var lasermin2:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
+    var lasermin3:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
+
     
 	override init() {
 		super.init()
@@ -82,15 +87,24 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         loadLifeBar()
         
         // Back button
-        let backButton:CCButton = CCButton(title: "[ Back ]", fontName: "Verdana-Bold", fontSize: 32.0)
-        backButton.position = CGPointMake(150, screenSize.height)
-        backButton.anchorPoint = CGPointMake(1.0, 1.0)
-        backButton.zoomWhenHighlighted = false
-        backButton.block = {_ in
-            StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
-            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ButtonTap)
-        }
-        self.addChild(backButton, z:ObjectsLayers.HUD.rawValue)
+        let imgButton:CCButton = CCButton(title: "", spriteFrame: CCSprite.spriteWithImageNamed("eject_01.png").spriteFrame)
+        imgButton.position = CGPointMake(60, screenSize.height-50)
+        imgButton.scale = 0.3
+                imgButton.block = {_ in
+                   StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
+                }
+                self.addChild(imgButton, z:ObjectsLayers.HUD.rawValue)
+     
+   
+//        let backButton:CCButton = CCButton(title: "[ Back ]", fontName: "Verdana-Bold", fontSize: 32.0)
+//        backButton.position = CGPointMake(150, screenSize.height)
+//        backButton.anchorPoint = CGPointMake(1.0, 1.0)
+//        backButton.zoomWhenHighlighted = false
+//        backButton.block = {_ in
+//            StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
+//            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ButtonTap)
+//        }
+//        self.addChild(backButton, z:ObjectsLayers.HUD.rawValue)
         
         // Configura o parallax infinito
         self.spaceBg.position = CGPointMake(0.0, 0.0)
@@ -280,8 +294,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
             SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
             //self.createParticleAtPosition(anEnemyShip.position)
             anEnemyShip.removeFromParentAndCleanup(true)
+
         }
-        
+
         // Remove o disparo
         anPlayerShot.removeFromParentAndCleanup(true)
         
@@ -317,11 +332,32 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate {
         
         if(aAsteroid.life <= 0){
             aAsteroid.removeFromParentAndCleanup(true)
+
+            laser.position = aAsteroid.position
+            //let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
+            //let asteroidSped:CCTime = CCTime(arc4random_uniform(16)) + 5.0 // De 15s a 20s
+            laser.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(laser.position.x, laser.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+               //laser.removeFromParentAndCleanup(true)
+            }) as! CCActionFiniteTime) as! CCAction)
+            //laser.runAction(rotate)
+            self.physicsWorld.addChild(laser ,z:ObjectsLayers.Foes.rawValue)
+
+            //self.addChild(laser,z:3)
         }
         
         aPlayerShot.removeFromParentAndCleanup(true)
         
         return true
+    }
+    //valida colisao entre heroi e lazer
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Laser aLaser: Laser!, PlayerShip aPlayerShip: PlayerShip!) -> Bool {
+        aLaser.removeFromParentAndCleanup(true)
+        self.lasermin1.position = CGPointMake(screenSize.width - 720, screenSize.height - 970)
+        lasermin1.scale = 2.0
+        lasermin1.anchorPoint = CGPointMake(1.0, 1.0)
+        self.addChild(lasermin1, z:ObjectsLayers.HUD.rawValue)
+ 
+    return true
     }
     
     func updateHeroLife(lifeHero:CGFloat){
