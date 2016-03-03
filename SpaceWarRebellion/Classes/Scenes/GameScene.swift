@@ -382,6 +382,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             heroLife50.removeFromParentAndCleanup(true)
         }
         else if(lifeHero <= 0.0){
+            
             heroLife25.removeFromParentAndCleanup(true)
         }
     }
