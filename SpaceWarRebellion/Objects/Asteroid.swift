@@ -49,6 +49,24 @@ class Asteroid:CCSprite{
         self.physicsBody.collisionType = "Asteroid"
         self.physicsBody.collisionCategories = ["Asteroid"]
         self.physicsBody.collisionMask = ["PlayerShip", "PlayerShot"]
+        
+        self.criarFogo()
+    }
+    
+    //função responsável pela geração do fogo dos asteroids.
+    func criarFogo(){
+        let asteroidFire:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        asteroidFire.scale = 2.0
+        asteroidFire.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.width/2)
+        self.addChild(asteroidFire, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    //Cria particulas da destruição do asteroid
+    func createAsteroidDestructionParticle(asteroidPosition: CGPoint) {
+        let particle:CCParticleSystem = CCParticleSystem(file: "boom3.plist")
+        particle.position = self.position
+        particle.autoRemoveOnFinish = true
+        self.addChild(particle, z:ObjectsLayers.Player.rawValue)
     }
     
     override func onEnter() {

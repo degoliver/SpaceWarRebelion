@@ -1,14 +1,12 @@
 //
-//  Laser.swift
+//  Item.swift
 //  SpaceWarRebellion
 //
-//  Created by Usuário Convidado on 02/03/16.
+//  Created by Anderson Ferreira on 03/03/16.
 //  Copyright © 2016 Flameworks. All rights reserved.
 //
 
-class Laser:CCSprite{
-    var damage:CGFloat = 25.0
-    var life:CGFloat = 100.0
+class Item:CCSprite{
     var gameSceneRef:GameScene?
     
     override init() {
@@ -38,16 +36,14 @@ class Laser:CCSprite{
     override init(imageNamed imageName: String!) {
         super.init(imageNamed: imageName)
         
-        self.rotation = 180.0
-        
         self.physicsBody = CCPhysicsBody(rect: CGRectMake(0, 0, self.contentSize.width, self.contentSize.height), cornerRadius: 0.0)
         self.physicsBody.type = CCPhysicsBodyType.Kinematic
         self.physicsBody.friction = 1.0
         self.physicsBody.elasticity = 0.1
         self.physicsBody.mass = 100.0
         self.physicsBody.density = 100.0
-        self.physicsBody.collisionType = "Laser"
-        self.physicsBody.collisionCategories = ["Laser"]
+        self.physicsBody.collisionType = "Item"
+        self.physicsBody.collisionCategories = ["Item"]
         self.physicsBody.collisionMask = ["PlayerShip"]
     }
     
@@ -59,4 +55,3 @@ class Laser:CCSprite{
         
     }
 }
-

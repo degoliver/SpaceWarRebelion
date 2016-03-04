@@ -16,8 +16,8 @@ class PlayerShip : CCSprite {
 	var life:CGFloat = 100.0
 
     var shieldLife:CGFloat = 0.0
-    var shieldDuration:CGFloat = 0.0
-    var shieldCount:CGFloat = 3.0
+    var shieldDuration:Int = 0
+    var shieldCount:Int = 0
     
     private var shield:CCSprite = CCSprite(imageNamed: "heroShield.png")
     
@@ -56,7 +56,14 @@ class PlayerShip : CCSprite {
 		self.physicsBody.density = 100.0
 		self.physicsBody.collisionType = "PlayerShip"
 		self.physicsBody.collisionCategories = ["PlayerShip"]
-		self.physicsBody.collisionMask = ["EnemyShip", "EnemyShot", "Asteroid","Laser"]
+		self.physicsBody.collisionMask = ["EnemyShip", "EnemyShot", "Asteroid", "Laser"]
+        
+        criaTurbinas()
+        
+        shield.scale = 0.0
+        self.shield.anchorPoint = CGPointMake(0.5, 0.5)
+        self.shield.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2)
+        self.addChild(shield, z: ObjectsLayers.Shot.rawValue)
 	}
 	
 	override func onEnter() {
@@ -69,6 +76,7 @@ class PlayerShip : CCSprite {
             shieldCount--
             self.shieldLife = 100.0
             self.shield.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.5) as! CCAction) as CCAction
+            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ActiveShield)
             DelayHelper.sharedInstance.callBlock({ () -> Void in
                 self.finishShield()
                 }, withDelay: 20.0)
@@ -76,6 +84,7 @@ class PlayerShip : CCSprite {
     }
     
     func finishShield(){
+        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShieldFinished)
         self.shieldLife = 0.0
         self.shield.scale = 0.0
     }
@@ -99,7 +108,6 @@ class PlayerShip : CCSprite {
         leftLittleParticle.position = CGPoint(x: (self.contentSize.width/2) - 40.0, y: self.contentSize.width - 132.0)
         leftLittleParticle.scale = 0.5
         self.addChild(leftLittleParticle, z:ObjectsLayers.turbina.rawValue)
-
     }
 	
 	// MARK: - Private Methods

@@ -12,11 +12,14 @@ enum GameMusicAndSoundFx:String {
     case MusicIntro = "MusicIntro.mp3"
 	case ButtonTap = "FXButtonTap.mp3"
     case ActiveShield = "FXShieldActivate.mp3"
-    case ActiveShield2 = "FXShieldActivate1.mp3"
+    case ShieldFinished = "FXShieldFinished.mp3"
     case HeroShot = "FXHeroLazerShot.mp3"
-    case ShipBoom = "FXShipBoom.wav"
+    case ShipBoom = "FXShipBoom.mp3"
+    case IntoLaserBeam = "FXIntoLaserBeam.mp3"
+    case LaserBeam = "FXLaserBeam.mp3"
+    
 	
-	static let allSoundFx = [ButtonTap, ActiveShield, ActiveShield2, HeroShot, ShipBoom]
+	static let allSoundFx = [ButtonTap, ActiveShield, ShieldFinished, HeroShot, ShipBoom, IntoLaserBeam, LaserBeam]
 }
 
 class SoundPlayHelper {

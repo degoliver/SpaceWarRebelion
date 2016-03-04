@@ -24,10 +24,17 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     var heroLife75:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife50:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife25:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
-    var laser:Laser = Laser(imageNamed: "laserBallBlue.png")
-    var lasermin1:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
-    var lasermin2:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
-    var lasermin3:CCSprite = CCSprite(imageNamed: "laserBallBlue_min.png")
+    
+    var item:Item = Item()
+    //Ícones para shields capturados.
+    var shieldItem1:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    var shieldItem2:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    var shieldItem3:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    
+    //Ícones para Laser Beam capturados.
+    var beamItem1:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    var beamItem2:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    var beamItem3:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
     
     //boss
     var boss: BossShip = BossShip(imageNamed: "boss.png")
@@ -97,27 +104,6 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                    StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
                 }
                 self.addChild(imgButton, z:ObjectsLayers.HUD.rawValue)
-     
-   
-//        let backButton:CCButton = CCButton(title: "[ Back ]", fontName: "Verdana-Bold", fontSize: 32.0)
-//        backButton.position = CGPointMake(150, screenSize.height)
-//        backButton.anchorPoint = CGPointMake(1.0, 1.0)
-//        backButton.zoomWhenHighlighted = false
-//        backButton.block = {_ in
-//            StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
-//            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ButtonTap)
-//        }
-//        self.addChild(backButton, z:ObjectsLayers.HUD.rawValue)
-        
-        // Back button
-        let aShield:CCButton = CCButton(title: "[ Shield]", fontName: "Verdana-Bold", fontSize: 32.0)
-        aShield.position = CGPointMake(1.0, 1.0)
-        aShield.anchorPoint = CGPointMake(0.5, 0.5)
-        aShield.zoomWhenHighlighted = false
-        aShield.block = {_ in
-            self.heroShip.activeShield()
-        }
-        self.addChild(aShield, z:ObjectsLayers.HUD.rawValue)
         
         // Configura o parallax infinito
         self.spaceBg.position = CGPointMake(0.0, 0.0)
@@ -133,9 +119,15 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         self.heroShip.position = CGPointMake(screenSize.width/2.0, 100.0)
         self.physicsWorld.addChild(self.heroShip, z:ObjectsLayers.Player.rawValue)
         
+        //Adiciona icones do shield.
+        self.adicionaShieldIcons()
+        
+        //Adciona ícones do Laser Beam.
+        self.adicionaLaserBeamIcons()
+        
         //Configura o BOSS
-        self.boss.position = CGPointMake(self.screenSize.width/2,800)
-        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
+//        self.boss.position = CGPointMake(self.screenSize.width/2,800)
+//        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
         //self.boss.visible = false gerar na classe BossShip
     }
     
@@ -159,26 +151,60 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
         self.physicsWorld.addChild(rightShot, z:ObjectsLayers.Shot.rawValue)
         self.physicsWorld.addChild(leftShot, z:ObjectsLayers.Shot.rawValue)
-        //liera do som do disparo.
+        //libera do som do disparo.
         SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.HeroShot)
     }
     
     func loadLifeBar(){
         self.heroLife100.position = CGPointMake(screenSize.width - 110, screenSize.height - 5)
-        heroLife100.anchorPoint = CGPointMake(1.0, 1.0)
+        self.heroLife100.anchorPoint = CGPointMake(1.0, 1.0)
         self.addChild(heroLife100, z:ObjectsLayers.HUD.rawValue)
         
         self.heroLife75.position = CGPointMake(screenSize.width - 75, screenSize.height - 5)
-        heroLife75.anchorPoint = CGPointMake(1.0, 1.0)
+        self.heroLife75.anchorPoint = CGPointMake(1.0, 1.0)
         self.addChild(heroLife75, z:ObjectsLayers.HUD.rawValue)
         
         self.heroLife50.position = CGPointMake(screenSize.width - 40, screenSize.height - 5)
-        heroLife50.anchorPoint = CGPointMake(1.0, 1.0)
+        self.heroLife50.anchorPoint = CGPointMake(1.0, 1.0)
         self.addChild(heroLife50, z:ObjectsLayers.HUD.rawValue)
         
         self.heroLife25.position = CGPointMake(screenSize.width - 5, screenSize.height - 5)
-        heroLife25.anchorPoint = CGPointMake(1.0, 1.0)
+        self.heroLife25.anchorPoint = CGPointMake(1.0, 1.0)
         self.addChild(heroLife25, z:ObjectsLayers.HUD.rawValue)
+    }
+    
+    func adicionaShieldIcons(){
+        self.shieldItem1.position = CGPointMake(screenSize.width - 5, 35)
+        self.shieldItem1.anchorPoint = CGPointMake(1.0, 1.0)
+        self.shieldItem1.scale = 0.0
+        self.addChild(shieldItem1, z:ObjectsLayers.HUD.rawValue)
+        
+        self.shieldItem2.position = CGPointMake(screenSize.width - 40, 35)
+        self.shieldItem2.anchorPoint = CGPointMake(1.0, 1.0)
+        self.shieldItem2.scale = 0.0
+        self.addChild(shieldItem2, z:ObjectsLayers.HUD.rawValue)
+        
+        self.shieldItem3.position = CGPointMake(screenSize.width - 75, 35)
+        self.shieldItem3.anchorPoint = CGPointMake(1.0, 1.0)
+        self.shieldItem3.scale = 0.0
+        self.addChild(shieldItem3, z:ObjectsLayers.HUD.rawValue)
+    }
+    
+    func adicionaLaserBeamIcons(){
+        self.beamItem1.position = CGPointMake(screenSize.width - 5, 70)
+        self.beamItem1.anchorPoint = CGPointMake(1.0, 1.0)
+        self.beamItem1.scale = 0.0
+        self.addChild(beamItem1, z:ObjectsLayers.HUD.rawValue)
+        
+        self.beamItem2.position = CGPointMake(screenSize.width - 40, 70)
+        self.beamItem2.anchorPoint = CGPointMake(1.0, 1.0)
+        self.beamItem2.scale = 0.0
+        self.addChild(beamItem2, z:ObjectsLayers.HUD.rawValue)
+        
+        self.beamItem3.position = CGPointMake(screenSize.width - 75, 70)
+        self.beamItem3.anchorPoint = CGPointMake(1.0, 1.0)
+        self.beamItem3.scale = 0.0
+        self.addChild(beamItem3, z:ObjectsLayers.HUD.rawValue)
     }
     
     func createEnemy() {
@@ -206,13 +232,12 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     }
     
     func enemyShotAtPosition(anPosition:CGPoint) {
-        //let shot:EnemyShot = EnemyShot(imageNamed: "laserBallBlue.png", andDamage:CGFloat((arc4random_uniform(5) + 3)))
         let shot:EnemyShot = EnemyShot(imageNamed: "laserBallRed.png", andDamage: 25.0)
         shot.anchorPoint = CGPointMake(0.5, 0.5)
         shot.position = anPosition
         
         // Movimenta o disparo ate o final da tela
-        shot.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(2.4, position:CGPointMake(anPosition.x, 0.0)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
+        shot.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(1.0, position:CGPointMake(anPosition.x, 0.0)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
             shot.removeFromParentAndCleanup(true)
         }) as! CCActionFiniteTime) as! CCAction)
         self.physicsWorld.addChild(shot, z:ObjectsLayers.Shot.rawValue)
@@ -312,7 +337,6 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
             //self.createParticleAtPosition(anEnemyShip.position)
             anEnemyShip.removeFromParentAndCleanup(true)
-
         }
 
         // Remove o disparo
@@ -350,50 +374,48 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
         if(aAsteroid.life <= 0){
             aAsteroid.removeFromParentAndCleanup(true)
+            aAsteroid.createAsteroidDestructionParticle(aAsteroid.position)
 
-            laser.position = aAsteroid.position
-            //let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
-            //let asteroidSped:CCTime = CCTime(arc4random_uniform(16)) + 5.0 // De 15s a 20s
-            laser.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(laser.position.x, laser.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
-               //laser.removeFromParentAndCleanup(true)
-            }) as! CCActionFiniteTime) as! CCAction)
-            //laser.runAction(rotate)
-            self.physicsWorld.addChild(laser ,z:ObjectsLayers.Foes.rawValue)
-
-            //self.addChild(laser,z:3)
+//            laser.position = aAsteroid.position
+//            laser.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(laser.position.x, laser.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+//            }) as! CCActionFiniteTime) as! CCAction)
+//            
+//            self.physicsWorld.addChild(laser ,z:ObjectsLayers.Foes.rawValue)
         }
         
         aPlayerShot.removeFromParentAndCleanup(true)
         
         return true
     }
-    //valida colisao entre heroi e lazer
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Laser aLaser: Laser!, PlayerShip aPlayerShip: PlayerShip!) -> Bool {
-        aLaser.removeFromParentAndCleanup(true)
-        self.lasermin1.position = CGPointMake(screenSize.width - 720, screenSize.height - 970)
-        lasermin1.scale = 2.0
-        lasermin1.anchorPoint = CGPointMake(1.0, 1.0)
-        self.addChild(lasermin1, z:ObjectsLayers.HUD.rawValue)
- 
+    
+    //valida colisao entre heroi e o Item
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Item aItem: Item!, PlayerShip aPlayerShip: PlayerShip!) -> Bool {
+        aItem.removeFromParentAndCleanup(true)
+        
     return true
     }
     
-    //valida colisao entre a o tiro da nave e o Boss
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
-        boss.life -= aPlayerShot.damage
+    //Anima o icone do item pego na tela.
+    func addIconScreen(){
         
-        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-        if boss.life <= 0{
-            boss.life = 0
-            // boss desaparece
-            boss.removeFromParentAndCleanup(true)
-        }else{
-            // mudar a cor do boss
-        }
-        aPlayerShot.removeFromParentAndCleanup(true)
-        
-        return true
     }
+    
+//    //valida colisao entre a o tiro da nave e o Boss
+//    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
+//        boss.life -= aPlayerShot.damage
+//        
+//        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+//        if boss.life <= 0{
+//            boss.life = 0
+//            // boss desaparece
+//            boss.removeFromParentAndCleanup(true)
+//        }else{
+//            // mudar a cor do boss
+//        }
+//        aPlayerShot.removeFromParentAndCleanup(true)
+//        
+//        return true
+//    }
     
     func updateHeroLife(lifeHero:CGFloat){
         if(lifeHero <= 75.0 && lifeHero > 50.0){
@@ -411,7 +433,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         }
     }
     
-    //registra os gestures usadosna gameScene
+    //registra os gestures usados na gameScene
     func registerGestures(){
         let swipDowm: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handlePlayerSwipe:")
         swipDowm.direction = UISwipeGestureRecognizerDirection.Down

@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1293CCAB19C08A25006A0E25"
+            BuildableName = "SpaceWarRebellion.app"
+            BlueprintName = "SpaceWarRebellion"
+            ReferencedContainer = "container:SpaceWarRebellion.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1293CCAF19C08A25006A0E25"
-            BuildableName = "libObjectiveChipmunk.a"
-            BlueprintName = "ObjectiveChipmunk"
-            ReferencedContainer = "container:CocosSwift.xcodeproj">
+            BlueprintIdentifier = "1293CCAB19C08A25006A0E25"
+            BuildableName = "SpaceWarRebellion.app"
+            BlueprintName = "SpaceWarRebellion"
+            ReferencedContainer = "container:SpaceWarRebellion.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
