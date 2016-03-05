@@ -97,9 +97,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         loadLifeBar()
         
         // Back button
-        let imgButton:CCButton = CCButton(title: "", spriteFrame: CCSprite.spriteWithImageNamed("eject_01.png").spriteFrame)
+        let imgButton:CCButton = CCButton(title: "", spriteFrame: CCSprite.spriteWithImageNamed("eject5.png").spriteFrame)
         imgButton.position = CGPointMake(60, screenSize.height-50)
-        imgButton.scale = 0.3
+        imgButton.scale = 0.2
                 imgButton.block = {_ in
                    StateMachine.sharedInstance.changeScene(StateMachineScenes.HomeScene, isFade:true)
                 }
@@ -513,6 +513,10 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         swipDowm.direction = UISwipeGestureRecognizerDirection.Down
         swipDowm.delegate = self
         CCDirector.sharedDirector().view.addGestureRecognizer(swipDowm)
+        let swipUp: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handlePlayerSwipe:")
+        swipUp.direction = UISwipeGestureRecognizerDirection.Up
+        swipUp.delegate = self
+        CCDirector.sharedDirector().view.addGestureRecognizer(swipUp)
     }
     
     //controle os getures da tela.
@@ -525,7 +529,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                     self.removeShieldIconScreen()
                     break
                 case UISwipeGestureRecognizerDirection.Up:
-                    //..
+                    self.removeLaserBeamIconScreen()
                     break
                 default:
                     debugPrint("Direção não tratada")

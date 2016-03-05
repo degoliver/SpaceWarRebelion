@@ -256,6 +256,7 @@
 		A0DB55351C87EB1A003C9EBC /* collision.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55341C87EB1A003C9EBC /* collision.plist */; };
 		AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F01C87C13D00468091 /* eject_01.png */; };
 		AC1CA1F51C87C3FA00468091 /* laserBallBlueIco.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */; };
+		ACFBEB051C8B086500C257B9 /* eject5.png in Resources */ = {isa = PBXBuildFile; fileRef = ACFBEB021C8B086500C257B9 /* eject5.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -715,6 +716,7 @@
 		A0DB55341C87EB1A003C9EBC /* collision.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = collision.plist; sourceTree = "<group>"; };
 		AC1CA1F01C87C13D00468091 /* eject_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_01.png; sourceTree = "<group>"; };
 		AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallBlueIco.png; sourceTree = "<group>"; };
+		ACFBEB021C8B086500C257B9 /* eject5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject5.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1594,6 +1596,7 @@
 		2C2AF3781C83CBE800D2C59D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ACFBEB021C8B086500C257B9 /* eject5.png */,
 				2C22DC661C8AAECC001372F4 /* laserBeam.png */,
 				2C5DC7F71C88FF5D009AA62D /* heroShieldIco.png */,
 				2C5DC7E51C88F7A3009AA62D /* boom1.plist */,
@@ -1757,6 +1760,7 @@
 				1255544919C0D85B00EC663C /* Images.xcassets in Resources */,
 				15EEE18E1C88E8D30061192E /* MusicIntro.mp3 in Resources */,
 				2C5DC7F41C88F8E7009AA62D /* FXShieldActivate.mp3 in Resources */,
+				ACFBEB051C8B086500C257B9 /* eject5.png in Resources */,
 				2C2AF38A1C83CBE800D2C59D /* enemyShip4.png in Resources */,
 				2C5DC7EF1C88F7A3009AA62D /* boom5.plist in Resources */,
 				2C5DC7ED1C88F7A3009AA62D /* boom3.plist in Resources */,
