@@ -25,7 +25,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     var heroLife50:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife25:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     
-    var item:Item?
+    
     //Ícones para shields capturados.
     var shieldItem1:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
     var shieldItem2:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
@@ -227,7 +227,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             return
         }
         
-        let asteroid:Asteroid = Asteroid(imageNamed: "asteroid.png")
+        let asteroid:Asteroid = Asteroid()
         asteroid.gameSceneRef = self
         asteroid.anchorPoint = CGPointMake(0.5, 0.5)
         let minScreenX:CGFloat = asteroid.boundingBox().size.width
@@ -235,8 +235,6 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
         let positionX:CGFloat = minScreenX + CGFloat(arc4random_uniform(maxScreenX))
         asteroid.position = CGPointMake(positionX, screenSize.height + asteroid.boundingBox().size.height)
-        let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
-        asteroid.runAction(rotate)
         self.physicsWorld.addChild(asteroid, z:ObjectsLayers.Foes.rawValue)
         
         let asteroidSped:CCTime = CCTime(arc4random_uniform(16)) + 5.0 // De 15s a 20s
@@ -249,7 +247,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     }
     
     func createParticleAtPosition(aPosition:CGPoint) {
-        let particleFile:CCParticleSystem = CCParticleSystem(file: "boom5.plist")
+        let particleFile:CCParticleSystem = CCParticleSystem(file: "boom.plist")
         particleFile.position = aPosition
         particleFile.autoRemoveOnFinish = true
         self.addChild(particleFile, z:ObjectsLayers.Player.rawValue)
@@ -328,18 +326,19 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         }else{
             anEnemyShip.life -= anPlayerShot.damage
             
-            if (anEnemyShip.life <= 0) {
+            if (anEnemyShip.life <= 0 && !anEnemyShip.isDead) {
+                anEnemyShip.isDead = true
                 SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
                 self.createParticleAtPosition(anEnemyShip.position)
                 anEnemyShip.removeFromParentAndCleanup(true)
                 
-                if(anEnemyShip.enemyType == 5){
-                    item = Item(imageNamed: "heroShieldIco.png")
-                    item!.type = "shield"
-                    item!.position = anEnemyShip.position
-                    item!.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item!.position.x, item!.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+                if(anEnemyShip.enemyType == 5 && arc4random_uniform(10) <= 3){
+                    let item:Item = Item(imageNamed: "heroShieldIco.png")
+                    item.type = "shield"
+                    item.position = anEnemyShip.position
+                    item.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item.position.x, item.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
                     }) as! CCActionFiniteTime) as! CCAction)
-                    self.physicsWorld.addChild(item! ,z:ObjectsLayers.Foes.rawValue)
+                    self.physicsWorld.addChild(item ,z:ObjectsLayers.Foes.rawValue)
                 }
             }
         }
@@ -373,27 +372,30 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     }
     
     //valida colisão entre tiro do heroi e tiro inimigo
-    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, EnemyShot aEnemyShot: EnemyShot!) -> Bool {
-        aPlayerShot.removeFromParentAndCleanup(true)
-        aEnemyShot.removeFromParentAndCleanup(true)
-        return true
-    }
+//    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, EnemyShot aEnemyShot: EnemyShot!) -> Bool {
+//        aPlayerShot.removeFromParentAndCleanup(true)
+//        aEnemyShot.removeFromParentAndCleanup(true)
+//        return true
+//    }
     
     //valida colisao entre asteroid e tiro do heroi
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Asteroid aAsteroid: Asteroid!, PlayerShot aPlayerShot: PlayerShot!) -> Bool {
         aAsteroid.life -= aPlayerShot.damage
         
-        if(aAsteroid.life <= 0){
+        if(aAsteroid.life <= 0 && !aAsteroid.isDead){
+            aAsteroid.isDead = true
             aAsteroid.removeFromParentAndCleanup(true)
             aAsteroid.createAsteroidDestructionParticle(aAsteroid.position)
 
-            item = Item(imageNamed: "laserBallBlue.png")
-            item!.type = "laserBeam"
-            item!.position = aAsteroid.position
-            item!.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item!.position.x, item!.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+            let item: Item = Item(imageNamed: "laserBallBlue.png")
+            item.type = "laserBeam"
+            item.position = CGPointMake(aAsteroid.position.x - 40, aAsteroid.position.y - 30)
+            print("\(item.position.x) | \(item.position.y)")
+            item.anchorPoint = CGPointMake(0.5, 0.5)
+            item.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item.position.x, item.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
             }) as! CCActionFiniteTime) as! CCAction)
             
-            self.physicsWorld.addChild(item! ,z:ObjectsLayers.Foes.rawValue)
+            self.physicsWorld.addChild(item ,z:ObjectsLayers.Foes.rawValue)
         }
         
         aPlayerShot.removeFromParentAndCleanup(true)
@@ -513,6 +515,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         swipDowm.direction = UISwipeGestureRecognizerDirection.Down
         swipDowm.delegate = self
         CCDirector.sharedDirector().view.addGestureRecognizer(swipDowm)
+        
+        let swipUp: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handlePlayerSwipe:")
+        swipUp.direction = UISwipeGestureRecognizerDirection.Down
+        swipUp.delegate = self
+        CCDirector.sharedDirector().view.addGestureRecognizer(swipUp)
     }
     
     //controle os getures da tela.
@@ -521,11 +528,15 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             if(recognizer.state == .Ended){
                 switch(recognizer.direction){
                 case UISwipeGestureRecognizerDirection.Down:
-                    self.heroShip.activeShield()
-                    self.removeShieldIconScreen()
+//                    self.heroShip.activeShield()
+//                    self.removeShieldIconScreen()
+                    
+                    self.heroShip.activateLaserBeam()
+                    self.removeLaserBeamIconScreen()
                     break
                 case UISwipeGestureRecognizerDirection.Up:
-                    //..
+                    self.heroShip.activateLaserBeam()
+                    self.removeLaserBeamIconScreen()
                     break
                 default:
                     debugPrint("Direção não tratada")

@@ -92,6 +92,18 @@ class PlayerShip : CCSprite {
         self.shield.scale = 0.0
     }
     
+    func activateLaserBeam(){
+        if(self.laserBeamCount >= 1){
+            laserBeamCount--
+            
+            let laserBeam:CCParticleSystem = CCParticleSystem(file: "lazer.plist")
+            laserBeam.position = CGPointMake((self.boundingBox().size.width/2) - 5, (self.boundingBox().size.height*4) + 60)
+            laserBeam.anchorPoint = CGPointMake(0.5, 0.0)
+            laserBeam.autoRemoveOnFinish = true
+            self.addChild(laserBeam, z:ObjectsLayers.Player.rawValue)
+        }
+    }
+    
     //função responsável pela geração das turbinas.
     func criaTurbinas(){
         let rightBigParticle:CCParticleSystem = CCParticleSystem(file: "turbina1.plist")

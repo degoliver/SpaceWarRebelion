@@ -10,6 +10,7 @@ class EnemyShip : CCSprite {
 	// MARK: - Public Objects
 	var damage:CGFloat = 25.0
 	var life:CGFloat = 100.0
+    var isDead: Bool = false
 	var gameSceneRef:GameScene?
     var enemyType:Int=0
     

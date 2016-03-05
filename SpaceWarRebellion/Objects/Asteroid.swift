@@ -6,41 +6,27 @@
 //  Copyright © 2016 Flameworks. All rights reserved.
 //
 
-class Asteroid:CCSprite{
+class Asteroid: CCNode {
     var damage:CGFloat = 25.0
     var life:CGFloat = 300.0
+    var isDead: Bool = false
     var gameSceneRef:GameScene?
+    var asteroid:CCSprite = CCSprite(imageNamed: "asteroid.png")
     
     override init() {
         super.init()
-    }
-    
-    override init(CGImage image: CGImage!, key: String!) {
-        super.init(CGImage: image, key: key)
-    }
-    
-    override init(spriteFrame: CCSpriteFrame!) {
-        super.init(spriteFrame: spriteFrame)
-    }
-    
-    override init(texture: CCTexture!) {
-        super.init(texture: texture)
-    }
-    
-    override init(texture: CCTexture!, rect: CGRect) {
-        super.init(texture: texture, rect: rect)
-    }
-    
-    override init(texture: CCTexture!, rect: CGRect, rotated: Bool) {
-        super.init(texture: texture, rect: rect, rotated: rotated)
-    }
-    
-    override init(imageNamed imageName: String!) {
-        super.init(imageNamed: imageName)
         
-        self.rotation = 180.0
         
-        self.physicsBody = CCPhysicsBody(rect: CGRectMake(0, 0, self.contentSize.width, self.contentSize.height), cornerRadius: 0.0)
+        asteroid.anchorPoint = CGPointMake(0.5, 0.5)
+        asteroid.rotation = 180.0
+        
+        let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
+        asteroid.runAction(rotate)
+        self.addChild(asteroid)
+        
+        self.criarFogo()
+
+        self.physicsBody = CCPhysicsBody(circleOfRadius: self.asteroid.boundingBox().size.width/2.0, andCenter: self.asteroid.position)
         self.physicsBody.type = CCPhysicsBodyType.Kinematic
         self.physicsBody.friction = 1.0
         self.physicsBody.elasticity = 0.1
@@ -50,18 +36,18 @@ class Asteroid:CCSprite{
         self.physicsBody.collisionCategories = ["Asteroid"]
         self.physicsBody.collisionMask = ["PlayerShip", "PlayerShot"]
         
-        self.criarFogo()
+        self.contentSize = asteroid.boundingBox().size
+
+//        let pt = self.parent!.convertToWorldSpace(asteroid.position)
+//        let pt = CCDirector.sharedDirector().convertToUI(asteroid.position)
+//        print("\(pt.x) | \(pt.y)")
     }
-    
+
     //função responsável pela geração do fogo dos asteroids.
     func criarFogo(){
         let asteroidFire:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
         asteroidFire.scale = 2.0
         asteroidFire.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.height/2)
-        
-        let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
-        asteroidFire.runAction(rotate)
-
         self.addChild(asteroidFire, z:ObjectsLayers.turbina.rawValue)
     }
     
