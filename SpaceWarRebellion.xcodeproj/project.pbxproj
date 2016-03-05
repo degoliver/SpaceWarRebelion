@@ -205,6 +205,7 @@
 		15EEE18B1C88E8BA0061192E /* secondIntro.png in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE1881C88E8BA0061192E /* secondIntro.png */; };
 		15EEE18C1C88E8BA0061192E /* thirdIntro.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE1891C88E8BA0061192E /* thirdIntro.jpg */; };
 		15EEE18E1C88E8D30061192E /* MusicIntro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15EEE18D1C88E8D30061192E /* MusicIntro.mp3 */; };
+		2C22DC671C8AAECC001372F4 /* laserBeam.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C22DC661C8AAECC001372F4 /* laserBeam.png */; };
 		2C2AF3721C83CBB800D2C59D /* FXIntoLaserBeam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36C1C83CBB800D2C59D /* FXIntoLaserBeam.mp3 */; };
 		2C2AF3731C83CBB800D2C59D /* FXShieldFinished.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36D1C83CBB800D2C59D /* FXShieldFinished.mp3 */; };
 		2C2AF3741C83CBB800D2C59D /* FXHeroLazerShot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2C2AF36E1C83CBB800D2C59D /* FXHeroLazerShot.mp3 */; };
@@ -254,7 +255,7 @@
 		A0DB55331C87EB02003C9EBC /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55321C87EB02003C9EBC /* explosion.png */; };
 		A0DB55351C87EB1A003C9EBC /* collision.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55341C87EB1A003C9EBC /* collision.plist */; };
 		AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F01C87C13D00468091 /* eject_01.png */; };
-		AC1CA1F51C87C3FA00468091 /* laserBallBlue_min.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */; };
+		AC1CA1F51C87C3FA00468091 /* laserBallBlueIco.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -663,6 +664,7 @@
 		15EEE1881C88E8BA0061192E /* secondIntro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = secondIntro.png; sourceTree = "<group>"; };
 		15EEE1891C88E8BA0061192E /* thirdIntro.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thirdIntro.jpg; sourceTree = "<group>"; };
 		15EEE18D1C88E8D30061192E /* MusicIntro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MusicIntro.mp3; sourceTree = "<group>"; };
+		2C22DC661C8AAECC001372F4 /* laserBeam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBeam.png; sourceTree = "<group>"; };
 		2C2AF36C1C83CBB800D2C59D /* FXIntoLaserBeam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXIntoLaserBeam.mp3; sourceTree = "<group>"; };
 		2C2AF36D1C83CBB800D2C59D /* FXShieldFinished.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXShieldFinished.mp3; sourceTree = "<group>"; };
 		2C2AF36E1C83CBB800D2C59D /* FXHeroLazerShot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FXHeroLazerShot.mp3; sourceTree = "<group>"; };
@@ -712,7 +714,7 @@
 		A0DB55321C87EB02003C9EBC /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
 		A0DB55341C87EB1A003C9EBC /* collision.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = collision.plist; sourceTree = "<group>"; };
 		AC1CA1F01C87C13D00468091 /* eject_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_01.png; sourceTree = "<group>"; };
-		AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallBlue_min.png; sourceTree = "<group>"; };
+		AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallBlueIco.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1592,6 +1594,7 @@
 		2C2AF3781C83CBE800D2C59D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2C22DC661C8AAECC001372F4 /* laserBeam.png */,
 				2C5DC7F71C88FF5D009AA62D /* heroShieldIco.png */,
 				2C5DC7E51C88F7A3009AA62D /* boom1.plist */,
 				2C5DC7E61C88F7A3009AA62D /* boom2.plist */,
@@ -1609,7 +1612,7 @@
 				A0DB55221C87E921003C9EBC /* particleTexture.png */,
 				A0DB55231C87E921003C9EBC /* turbina1.plist */,
 				A0DB55241C87E921003C9EBC /* turbina2.plist */,
-				AC1CA1F41C87C3FA00468091 /* laserBallBlue_min.png */,
+				AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */,
 				AC1CA1F01C87C13D00468091 /* eject_01.png */,
 				2C2AF3A61C8406C400D2C59D /* heroShot.png */,
 				2C2AF39E1C83EF5B00D2C59D /* laserBallBlue.png */,
@@ -1732,12 +1735,13 @@
 				2C5DC7F81C88FF5D009AA62D /* heroShieldIco.png in Resources */,
 				2C2AF3871C83CBE800D2C59D /* enemyShip.png in Resources */,
 				2C2AF3A11C83EF5B00D2C59D /* laserBallRed.png in Resources */,
+				2C22DC671C8AAECC001372F4 /* laserBeam.png in Resources */,
 				2C2AF3721C83CBB800D2C59D /* FXIntoLaserBeam.mp3 in Resources */,
 				2C5DC7F01C88F7A3009AA62D /* boom6.plist in Resources */,
 				A0DB55301C87EAE7003C9EBC /* boss.png in Resources */,
 				15EEE18A1C88E8BA0061192E /* firstIntro.png in Resources */,
 				1255545119C0D90600EC663C /* Default.png in Resources */,
-				AC1CA1F51C87C3FA00468091 /* laserBallBlue_min.png in Resources */,
+				AC1CA1F51C87C3FA00468091 /* laserBallBlueIco.png in Resources */,
 				A0DB55331C87EB02003C9EBC /* explosion.png in Resources */,
 				A0DB55311C87EAE7003C9EBC /* collisionPlist.png in Resources */,
 				AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */,

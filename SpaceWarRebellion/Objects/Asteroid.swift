@@ -8,7 +8,7 @@
 
 class Asteroid:CCSprite{
     var damage:CGFloat = 25.0
-    var life:CGFloat = 100.0
+    var life:CGFloat = 300.0
     var gameSceneRef:GameScene?
     
     override init() {
@@ -57,7 +57,11 @@ class Asteroid:CCSprite{
     func criarFogo(){
         let asteroidFire:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
         asteroidFire.scale = 2.0
-        asteroidFire.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.width/2)
+        asteroidFire.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.height/2)
+        
+        let rotate:CCAction = CCActionRepeatForever.actionWithAction(CCActionRotateBy.actionWithDuration(0.5, angle: 180) as! CCActionInterval) as! CCAction!
+        asteroidFire.runAction(rotate)
+
         self.addChild(asteroidFire, z:ObjectsLayers.turbina.rawValue)
     }
     

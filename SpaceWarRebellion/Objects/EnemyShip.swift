@@ -9,11 +9,16 @@
 class EnemyShip : CCSprite {
 	// MARK: - Public Objects
 	var damage:CGFloat = 25.0
-	var life:CGFloat = 25.0
+	var life:CGFloat = 100.0
 	var gameSceneRef:GameScene?
+    var enemyType:Int=0
+    
+    private var shield:CCSprite = CCSprite(imageNamed: "heroShield.png")
+    var isShielded:Bool = false
+    var shieldLife:CGFloat = 0.0
 	
 	// MARK: - Private Objects
-	var numShots:Int = 5
+	var numShots:Int = 10
 	var shootDelayCount:Int = 0
 	
 	// MARK: - Life Cycle
@@ -70,6 +75,91 @@ class EnemyShip : CCSprite {
 			self.gameSceneRef!.enemyShotAtPosition(self.position)
 		}
 	}
+    
+    //função responsável pela geração das turbinas.
+    func criaTurbinas(){
+        switch(enemyType){
+        case 1:
+            turbina1()
+            break
+        case 2:
+            turbina2()
+            break
+        case 3:
+            turbina3()
+            break
+        case 4:
+            turbina4()
+            break
+        case 5:
+            turbina5()
+            activeShield()
+            break
+        default:
+            break
+        }
+    }
+    
+    func turbina1(){
+        let rightParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        rightParticle.position = CGPoint(x: (self.contentSize.width/2) + 16.0, y: self.contentSize.height)
+        rightParticle.scale = 0.8
+        self.addChild(rightParticle, z:ObjectsLayers.turbina.rawValue)
+        
+        let leftParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        leftParticle.position = CGPoint(x: (self.contentSize.width/2) - 16.0, y: self.contentSize.height)
+        leftParticle.scale = 0.8
+        self.addChild(leftParticle, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    func turbina2(){
+        let rightParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        rightParticle.position = CGPoint(x: (self.contentSize.width/2) + 5.0, y: self.contentSize.height - 8)
+        rightParticle.scale = 0.8
+        self.addChild(rightParticle, z:ObjectsLayers.turbina.rawValue)
+        
+        let leftParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        leftParticle.position = CGPoint(x: (self.contentSize.width/2) - 5.0, y: self.contentSize.height - 8)
+        leftParticle.scale = 0.8
+        self.addChild(leftParticle, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    func turbina3(){
+        let rightParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        rightParticle.position = CGPoint(x: (self.contentSize.width/2) + 10.0, y: self.contentSize.height - 5)
+        self.addChild(rightParticle, z:ObjectsLayers.turbina.rawValue)
+        
+        let leftParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        leftParticle.position = CGPoint(x: (self.contentSize.width/2) - 10.0, y: self.contentSize.height - 5)
+        self.addChild(leftParticle, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    func turbina4(){
+        let rightParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        rightParticle.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.height - 5)
+        rightParticle.scale = 1.5
+        self.addChild(rightParticle, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    func turbina5(){
+        let rightParticle:CCParticleSystem = CCParticleSystem(file: "turbina2.plist")
+        rightParticle.position = CGPoint(x: self.contentSize.width/2, y: self.contentSize.height - 5)
+        self.addChild(rightParticle, z:ObjectsLayers.turbina.rawValue)
+    }
+    
+    func activeShield(){
+        self.isShielded = true
+        self.shieldLife = 200.0
+        self.shield.anchorPoint = CGPointMake(0.5, 0.5)
+        self.shield.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/2)
+        self.addChild(shield, z: ObjectsLayers.Shot.rawValue)
+    }
+    
+    func removeShield(){
+        self.isShielded = false
+        self.shield.scale = 0.0
+        self.shield.anchorPoint = CGPointMake(0.5, 0.5)
+    }
     
 	deinit {
 		

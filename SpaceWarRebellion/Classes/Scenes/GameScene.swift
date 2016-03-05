@@ -25,16 +25,16 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     var heroLife50:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     var heroLife25:CCSprite = CCSprite(imageNamed: "heroShipLife.png")
     
-    var item:Item = Item()
+    var item:Item?
     //Ícones para shields capturados.
     var shieldItem1:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
     var shieldItem2:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
     var shieldItem3:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
     
     //Ícones para Laser Beam capturados.
-    var beamItem1:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
-    var beamItem2:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
-    var beamItem3:CCSprite = CCSprite(imageNamed: "heroShieldIco.png")
+    var beamItem1:CCSprite = CCSprite(imageNamed: "laserBallBlue.png")
+    var beamItem2:CCSprite = CCSprite(imageNamed: "laserBallBlue.png")
+    var beamItem3:CCSprite = CCSprite(imageNamed: "laserBallBlue.png")
     
     //boss
     var boss: BossShip = BossShip(imageNamed: "boss.png")
@@ -81,8 +81,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         if (self.isTouching) {
             self.fireDelayCount++
             if (self.fireDelayCount > self.heroShip.atackSpeed) {
-                self.fireDelayCount = 0.0
-                self.heroFire()
+                self.fireDelayCount = 2.0
+                self.heroShip.heroFire(self)
             }
         }
     }
@@ -126,33 +126,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         self.adicionaLaserBeamIcons()
         
         //Configura o BOSS
-//        self.boss.position = CGPointMake(self.screenSize.width/2,800)
-//        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
+        //self.boss.position = CGPointMake(self.screenSize.width/2,800)
+        //self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
         //self.boss.visible = false gerar na classe BossShip
-    }
-    
-    func heroFire() {
-        let leftShot:PlayerShot = PlayerShot(imageNamed:"heroShot.png", andDamage:25.0)
-        let rightShot:PlayerShot = PlayerShot(imageNamed:"heroShot.png", andDamage:25.0)
-        
-        leftShot.anchorPoint = CGPointMake(0.5, 0.5)
-        rightShot.anchorPoint = CGPointMake(0.5, 0.5)
-        
-        leftShot.position = CGPointMake(self.heroShip.position.x - 45.0, self.heroShip.position.y + 50.0)
-        rightShot.position = CGPointMake(self.heroShip.position.x + 45.0, self.heroShip.position.y + 50.0)
-        
-        leftShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
-            leftShot.removeFromParentAndCleanup(true)
-        }) as! CCActionFiniteTime) as! CCAction)
-        
-        rightShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
-            rightShot.removeFromParentAndCleanup(true)
-        }) as! CCActionFiniteTime) as! CCAction)
-        
-        self.physicsWorld.addChild(rightShot, z:ObjectsLayers.Shot.rawValue)
-        self.physicsWorld.addChild(leftShot, z:ObjectsLayers.Shot.rawValue)
-        //libera do som do disparo.
-        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.HeroShot)
     }
     
     func loadLifeBar(){
@@ -212,7 +188,10 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             return
         }
         
-        let inimigo:EnemyShip = EnemyShip(imageNamed:"enemyShip\(arc4random_uniform(5) + 1).png")
+        let random: Int = Int(arc4random_uniform(5) + 1)
+        let inimigo:EnemyShip = EnemyShip(imageNamed:"enemyShip\(random).png")
+        inimigo.enemyType = random
+        inimigo.criaTurbinas()
         inimigo.gameSceneRef = self
         inimigo.anchorPoint = CGPointMake(0.5, 0.5)
         let minScreenX:CGFloat = inimigo.boundingBox().size.width
@@ -269,9 +248,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         DelayHelper.sharedInstance.callFunc("createAsteroid", onTarget: self, withDelay: delay)
     }
     
-    //alterar esse método
     func createParticleAtPosition(aPosition:CGPoint) {
-        let particleFile:CCParticleSystem = CCParticleSystem(file: "ShipBlow.plist")
+        let particleFile:CCParticleSystem = CCParticleSystem(file: "boom5.plist")
         particleFile.position = aPosition
         particleFile.autoRemoveOnFinish = true
         self.addChild(particleFile, z:ObjectsLayers.Player.rawValue)
@@ -280,7 +258,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     func doGameOver() {
         self.canPlay = false
         self.isTouching = false
-        //self.createParticleAtPosition(self.heroShip.position)
+        self.createParticleAtPosition(self.heroShip.position)
         self.heroShip.removeFromParentAndCleanup(true)
         
         // Exibe o texto game over
@@ -292,16 +270,22 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     
     //valida colisao entre a nave do heroi e nave inimiga
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShip aPlayerShip:PlayerShip!, EnemyShip anEnemyShip:EnemyShip!) -> Bool {
-        aPlayerShip.life -= anEnemyShip.damage
-        if (aPlayerShip.life <= 0) {
-            updateHeroLife(aPlayerShip.life)
-            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-            aPlayerShip.life = 0
-            self.doGameOver()
+        if(aPlayerShip.isShielded){
+            aPlayerShip.shieldLife -= anEnemyShip.damage
+            if(aPlayerShip.shieldLife <= 0){
+                aPlayerShip.finishShield()
+            }
+        }else{
+            aPlayerShip.life -= anEnemyShip.damage
+            if (aPlayerShip.life <= 0) {
+                updateHeroLife(aPlayerShip.life)
+                SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+                aPlayerShip.life = 0
+                self.doGameOver()
+            }
         }
-        
         SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-        //self.createParticleAtPosition(anEnemyShip.position)
+        self.createParticleAtPosition(anEnemyShip.position)
         anEnemyShip.removeFromParentAndCleanup(true)
         
         // Configura o display da vida do player
@@ -312,31 +296,52 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     
     //valida colisao entre nave do heroi e tiro inimigo
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShip aPlayerShip:PlayerShip!, EnemyShot anEnemyShot:EnemyShot!) -> Bool {
-        aPlayerShip.life -= anEnemyShot.damage
-        if (aPlayerShip.life <= 0) {
+        if(aPlayerShip.isShielded){
+            aPlayerShip.shieldLife -= anEnemyShot.damage
+            if(aPlayerShip.shieldLife <= 0){
+                aPlayerShip.finishShield()
+            }
+        }else{
+            aPlayerShip.life -= anEnemyShot.damage
+            if (aPlayerShip.life <= 0) {
+                updateHeroLife(aPlayerShip.life)
+                SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+                aPlayerShip.life = 0
+                self.doGameOver()
+            }
+            // Configura o display da vida do player
             updateHeroLife(aPlayerShip.life)
-            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-            aPlayerShip.life = 0
-            self.doGameOver()
         }
-        
         // Remove o disparo
         anEnemyShot.removeFromParentAndCleanup(true)
-        
-        // Configura o display da vida do player
-        updateHeroLife(aPlayerShip.life)
-        
         return true
     }
     
-    //valida colisao entre nave inimiga e tiro do hero
+    //valida colisao entre nave inimiga e tiro do heroi
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, EnemyShip anEnemyShip:EnemyShip!, PlayerShot anPlayerShot:PlayerShot!) -> Bool {
-        anEnemyShip.life -= anPlayerShot.damage
-        
-        if (anEnemyShip.life <= 0) {
-            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-            //self.createParticleAtPosition(anEnemyShip.position)
-            anEnemyShip.removeFromParentAndCleanup(true)
+        if(anEnemyShip.isShielded){
+            anEnemyShip.shieldLife -= anPlayerShot.damage
+            
+            if(anEnemyShip.shieldLife <= 0){
+                anEnemyShip.removeShield()
+            }
+        }else{
+            anEnemyShip.life -= anPlayerShot.damage
+            
+            if (anEnemyShip.life <= 0) {
+                SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+                self.createParticleAtPosition(anEnemyShip.position)
+                anEnemyShip.removeFromParentAndCleanup(true)
+                
+                if(anEnemyShip.enemyType == 5){
+                    item = Item(imageNamed: "heroShieldIco.png")
+                    item!.type = "shield"
+                    item!.position = anEnemyShip.position
+                    item!.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item!.position.x, item!.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+                    }) as! CCActionFiniteTime) as! CCAction)
+                    self.physicsWorld.addChild(item! ,z:ObjectsLayers.Foes.rawValue)
+                }
+            }
         }
 
         // Remove o disparo
@@ -347,15 +352,21 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     
     //valida colisao entre a nave do heroi e o asteroid.
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShip aPlayerShip: PlayerShip!, Asteroid aAsteroid: Asteroid!) -> Bool {
-        aPlayerShip.life -= aAsteroid.damage
-        if(aPlayerShip.life <= 0){
+        if (aPlayerShip.life <= 0) {
+            updateHeroLife(aPlayerShip.life)
             SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
             aPlayerShip.life = 0
             self.doGameOver()
         }else{
-            updateHeroLife(aPlayerShip.life)
+            aPlayerShip.life -= aAsteroid.damage
+            if(aPlayerShip.life <= 0){
+                SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+                aPlayerShip.life = 0
+                self.doGameOver()
+            }else{
+                updateHeroLife(aPlayerShip.life)
+            }
         }
-        
         aAsteroid.removeFromParentAndCleanup(true)
         
         return  true
@@ -376,11 +387,13 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             aAsteroid.removeFromParentAndCleanup(true)
             aAsteroid.createAsteroidDestructionParticle(aAsteroid.position)
 
-//            laser.position = aAsteroid.position
-//            laser.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(laser.position.x, laser.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
-//            }) as! CCActionFiniteTime) as! CCAction)
-//            
-//            self.physicsWorld.addChild(laser ,z:ObjectsLayers.Foes.rawValue)
+            item = Item(imageNamed: "laserBallBlue.png")
+            item!.type = "laserBeam"
+            item!.position = aAsteroid.position
+            item!.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item!.position.x, item!.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+            }) as! CCActionFiniteTime) as! CCAction)
+            
+            self.physicsWorld.addChild(item! ,z:ObjectsLayers.Foes.rawValue)
         }
         
         aPlayerShot.removeFromParentAndCleanup(true)
@@ -391,13 +404,74 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     //valida colisao entre heroi e o Item
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Item aItem: Item!, PlayerShip aPlayerShip: PlayerShip!) -> Bool {
         aItem.removeFromParentAndCleanup(true)
+        switch(aItem.type){
+        case "laserBeam":
+            if(self.heroShip.laserBeamCount < 3){
+                heroShip.laserBeamCount++
+                addLaserBeamIconScreen()
+            }
+            break
+        case "shield":
+            if(self.heroShip.shieldCount < 3){
+                self.heroShip.shieldCount++
+                addShieldIconScreen()
+            }
+            break
+        case "rapidFire":
+            //..
+            break
+        default:
+            break
+        }
         
     return true
     }
     
     //Anima o icone do item pego na tela.
-    func addIconScreen(){
+    func addShieldIconScreen(){
+        if(self.heroShip.shieldCount == 1){
+            self.shieldItem1.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }else if(self.heroShip.shieldCount == 2){
+            self.shieldItem2.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }else{
+            self.shieldItem3.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }
+    }
+    
+    //Anima o icone do item pego na tela.
+    func addLaserBeamIconScreen(){
+        if(self.heroShip.laserBeamCount == 1){
+            self.beamItem1.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }else if (self.heroShip.laserBeamCount == 2){
+            self.beamItem2.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }else{
+            self.beamItem3.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.0) as! CCAction) as CCAction
+        }
+    }
+    
+    //Anima o icone do item pego na tela.
+    func activateRapidFire(){
         
+    }
+    
+    func removeShieldIconScreen(){
+        if(self.heroShip.shieldCount == 2){
+            self.shieldItem3.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }else if(self.heroShip.shieldCount == 1){
+            self.shieldItem2.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }else{
+            self.shieldItem1.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }
+    }
+    
+    func removeLaserBeamIconScreen(){
+        if(self.heroShip.laserBeamCount == 2){
+            self.beamItem3.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }else if (self.heroShip.laserBeamCount == 1){
+            self.beamItem2.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }else{
+            self.beamItem1.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
+        }
     }
     
 //    //valida colisao entre a o tiro da nave e o Boss
@@ -447,7 +521,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             if(recognizer.state == .Ended){
                 switch(recognizer.direction){
                 case UISwipeGestureRecognizerDirection.Down:
-                    heroShip.activeShield()
+                    self.heroShip.activeShield()
+                    self.removeShieldIconScreen()
+                    break
+                case UISwipeGestureRecognizerDirection.Up:
+                    //..
                     break
                 default:
                     debugPrint("Direção não tratada")
@@ -464,7 +542,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             //self.heroShip.position = locationInView
             let move:CCAction = CCActionMoveTo.actionWithDuration(0.4, position: CGPointMake(locationInView.x,
                 heroShip.position.y)) as! CCAction
-            heroFire()
+            self.heroShip.heroFire(self)
             heroShip.runAction(move)
         }
     }

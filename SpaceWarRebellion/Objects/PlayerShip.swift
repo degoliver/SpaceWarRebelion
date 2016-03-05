@@ -7,17 +7,19 @@
 //
 // MARK: - Class Definition
 class PlayerShip : CCSprite {
-	// MARK: - Public Objects
     internal var eventSelector:Selector?
     internal var targetID:AnyObject?
     private var alive:Bool = true
-    
+
 	var atackSpeed:CGFloat = 5.0
 	var life:CGFloat = 100.0
 
+    var isShielded:Bool = false
     var shieldLife:CGFloat = 0.0
     var shieldDuration:Int = 0
     var shieldCount:Int = 0
+    
+    var laserBeamCount:Int = 0
     
     private var shield:CCSprite = CCSprite(imageNamed: "heroShield.png")
     
@@ -56,9 +58,9 @@ class PlayerShip : CCSprite {
 		self.physicsBody.density = 100.0
 		self.physicsBody.collisionType = "PlayerShip"
 		self.physicsBody.collisionCategories = ["PlayerShip"]
-		self.physicsBody.collisionMask = ["EnemyShip", "EnemyShot", "Asteroid", "Laser"]
+		self.physicsBody.collisionMask = ["EnemyShip", "EnemyShot", "Asteroid", "Item"]
         
-        criaTurbinas()
+        self.criaTurbinas()
         
         shield.scale = 0.0
         self.shield.anchorPoint = CGPointMake(0.5, 0.5)
@@ -74,6 +76,7 @@ class PlayerShip : CCSprite {
     func activeShield(){
         if(self.shieldCount >= 1){
             shieldCount--
+            self.isShielded = true
             self.shieldLife = 100.0
             self.shield.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 1.5) as! CCAction) as CCAction
             SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ActiveShield)
@@ -85,7 +88,7 @@ class PlayerShip : CCSprite {
     
     func finishShield(){
         SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShieldFinished)
-        self.shieldLife = 0.0
+        self.isShielded = false
         self.shield.scale = 0.0
     }
     
@@ -110,13 +113,30 @@ class PlayerShip : CCSprite {
         self.addChild(leftLittleParticle, z:ObjectsLayers.turbina.rawValue)
     }
 	
-	// MARK: - Private Methods
-	
-	// MARK: - Public Methods
-
-	// MARK: - Delegates/Datasources
-	
-	// MARK: - Death Cycle
+    func heroFire(gameScene:GameScene) {
+        let leftShot:PlayerShot = PlayerShot(imageNamed:"heroShot.png", andDamage:25.0)
+        let rightShot:PlayerShot = PlayerShot(imageNamed:"heroShot.png", andDamage:25.0)
+        
+        leftShot.anchorPoint = CGPointMake(0.5, 0.5)
+        rightShot.anchorPoint = CGPointMake(0.5, 0.5)
+        
+        leftShot.position = CGPointMake(self.position.x - 45.0, self.position.y + 50.0)
+        rightShot.position = CGPointMake(self.position.x + 45.0, self.position.y + 50.0)
+        
+        leftShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
+            leftShot.removeFromParentAndCleanup(true)
+        }) as! CCActionFiniteTime) as! CCAction)
+        
+        rightShot.runAction(CCActionSequence.actionOne(CCActionMoveBy.actionWithDuration(0.4, position: CGPointMake(0.0, screenSize.height)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ () -> Void in
+            rightShot.removeFromParentAndCleanup(true)
+        }) as! CCActionFiniteTime) as! CCAction)
+        
+        gameScene.physicsWorld.addChild(rightShot, z:ObjectsLayers.Shot.rawValue)
+        gameScene.physicsWorld.addChild(leftShot, z:ObjectsLayers.Shot.rawValue)
+        //libera do som do disparo.
+        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.HeroShot)
+    }
+    
 	deinit {
 		// Chamado no momento de desalocacao
 	}

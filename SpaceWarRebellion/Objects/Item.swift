@@ -8,6 +8,7 @@
 
 class Item:CCSprite{
     var gameSceneRef:GameScene?
+    var type:String = ""
     
     override init() {
         super.init()
