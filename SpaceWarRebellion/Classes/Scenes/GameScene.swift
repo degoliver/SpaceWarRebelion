@@ -126,8 +126,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         self.adicionaLaserBeamIcons()
         
         //Configura o BOSS
-        //self.boss.position = CGPointMake(self.screenSize.width/2,800)
-        //self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
+        self.boss.position = CGPointMake(self.screenSize.width/2,800)
+        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
         //self.boss.visible = false gerar na classe BossShip
     }
     
@@ -474,22 +474,27 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         }
     }
     
-//    //valida colisao entre a o tiro da nave e o Boss
-//    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
-//        boss.life -= aPlayerShot.damage
-//        
-//        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-//        if boss.life <= 0{
-//            boss.life = 0
-//            // boss desaparece
-//            boss.removeFromParentAndCleanup(true)
-//        }else{
-//            // mudar a cor do boss
-//        }
-//        aPlayerShot.removeFromParentAndCleanup(true)
-//        
-//        return true
-//    }
+    //valida colisao entre a o tiro da nave e o Boss
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
+        var explosion: Effect = Effect()
+        boss.life -= aPlayerShot.damage
+        
+        if boss.life <= 0{
+            boss.life = 0
+            
+            // boss desaparece
+            boss.removeFromParentAndCleanup(true)
+        }else{
+            // alteracoes do boss
+            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+            explosion.position = CGPointMake(aPlayerShot.position.x,aPlayerShot.position.y)
+            explosion.scale = 0.5
+            self.addChild(explosion, z: 10)
+        }
+        aPlayerShot.removeFromParentAndCleanup(true)
+    
+        return true
+    }
     
     func updateHeroLife(lifeHero:CGFloat){
         if(lifeHero <= 75.0 && lifeHero > 50.0){
