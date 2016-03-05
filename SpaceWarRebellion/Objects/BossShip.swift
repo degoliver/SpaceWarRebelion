@@ -11,8 +11,8 @@ import UIKit
 class BossShip: CCSprite {
 
     var damage:CGFloat = 75.0
-    var life:CGFloat = 800.0
-    var gameSceneRef:GameScene?
+    var life:CGFloat = 1600.0
+    //var gameSceneRef:GameScene?
     var toLEft = false
     
     override init() {
@@ -52,7 +52,7 @@ class BossShip: CCSprite {
         self.physicsBody.density = 100.0
         self.physicsBody.collisionType = "BossShip"
         self.physicsBody.collisionCategories = ["BossShip"]
-        self.physicsBody.collisionMask = ["PlayerShip", "PlayerShot", "PlayerShot"]
+        self.physicsBody.collisionMask = ["PlayerShot"]
     }
     
     override func onEnter() {

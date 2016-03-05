@@ -251,9 +251,6 @@
 		A0DB552C1C87EA75003C9EBC /* BossShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB552A1C87EA75003C9EBC /* BossShip.swift */; };
 		A0DB552D1C87EA75003C9EBC /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB552B1C87EA75003C9EBC /* Effect.swift */; };
 		A0DB55301C87EAE7003C9EBC /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB552E1C87EAE7003C9EBC /* boss.png */; };
-		A0DB55311C87EAE7003C9EBC /* collisionPlist.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */; };
-		A0DB55331C87EB02003C9EBC /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55321C87EB02003C9EBC /* explosion.png */; };
-		A0DB55351C87EB1A003C9EBC /* collision.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0DB55341C87EB1A003C9EBC /* collision.plist */; };
 		AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F01C87C13D00468091 /* eject_01.png */; };
 		AC1CA1F51C87C3FA00468091 /* laserBallBlueIco.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */; };
 		AC621BAE1C8B20280040CEF0 /* boom.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC621BAC1C8B20280040CEF0 /* boom.plist */; };
@@ -712,9 +709,6 @@
 		A0DB552A1C87EA75003C9EBC /* BossShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BossShip.swift; sourceTree = "<group>"; };
 		A0DB552B1C87EA75003C9EBC /* Effect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		A0DB552E1C87EAE7003C9EBC /* boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss.png; sourceTree = "<group>"; };
-		A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collisionPlist.png; sourceTree = "<group>"; };
-		A0DB55321C87EB02003C9EBC /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
-		A0DB55341C87EB1A003C9EBC /* collision.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = collision.plist; sourceTree = "<group>"; };
 		AC1CA1F01C87C13D00468091 /* eject_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_01.png; sourceTree = "<group>"; };
 		AC1CA1F41C87C3FA00468091 /* laserBallBlueIco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laserBallBlueIco.png; sourceTree = "<group>"; };
 		AC621BAC1C8B20280040CEF0 /* boom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = boom.plist; sourceTree = "<group>"; };
@@ -842,7 +836,6 @@
 		1293CCB219C08A25006A0E25 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A0DB55341C87EB1A003C9EBC /* collision.plist */,
 				2C2AF3781C83CBE800D2C59D /* Images */,
 				1255544819C0D85B00EC663C /* Images.xcassets */,
 				1226620E19F00CD6001FE3B9 /* DefaultParticleFire */,
@@ -1611,9 +1604,7 @@
 				15EEE1871C88E8BA0061192E /* firstIntro.png */,
 				15EEE1881C88E8BA0061192E /* secondIntro.png */,
 				15EEE1891C88E8BA0061192E /* thirdIntro.jpg */,
-				A0DB55321C87EB02003C9EBC /* explosion.png */,
 				A0DB552E1C87EAE7003C9EBC /* boss.png */,
-				A0DB552F1C87EAE7003C9EBC /* collisionPlist.png */,
 				A0DB55281C87E95C003C9EBC /* heroShield.png */,
 				A0DB55221C87E921003C9EBC /* particleTexture.png */,
 				A0DB55231C87E921003C9EBC /* turbina1.plist */,
@@ -1748,8 +1739,6 @@
 				15EEE18A1C88E8BA0061192E /* firstIntro.png in Resources */,
 				1255545119C0D90600EC663C /* Default.png in Resources */,
 				AC1CA1F51C87C3FA00468091 /* laserBallBlueIco.png in Resources */,
-				A0DB55331C87EB02003C9EBC /* explosion.png in Resources */,
-				A0DB55311C87EAE7003C9EBC /* collisionPlist.png in Resources */,
 				AC1CA1F11C87C13D00468091 /* eject_01.png in Resources */,
 				2C2AF3A71C8406C400D2C59D /* heroShot.png in Resources */,
 				2C2AF38D1C83CBE800D2C59D /* starkiller.png in Resources */,
@@ -1763,10 +1752,12 @@
 				1255544919C0D85B00EC663C /* Images.xcassets in Resources */,
 				15EEE18E1C88E8D30061192E /* MusicIntro.mp3 in Resources */,
 				2C5DC7F41C88F8E7009AA62D /* FXShieldActivate.mp3 in Resources */,
+				ACFBEB051C8B086500C257B9 /* eject5.png in Resources */,
 				2C2AF38A1C83CBE800D2C59D /* enemyShip4.png in Resources */,
 				2C5DC7EF1C88F7A3009AA62D /* boom5.plist in Resources */,
 				2C5DC7ED1C88F7A3009AA62D /* boom3.plist in Resources */,
 				A0DB55291C87E95C003C9EBC /* heroShield.png in Resources */,
+				AC3041041C8B145C00F86F06 /* explosion.png in Resources */,
 				2C5DC7EC1C88F7A3009AA62D /* boom2.plist in Resources */,
 				1255544F19C0D90600EC663C /* Default-568h@2x.png in Resources */,
 				2C2AF3881C83CBE800D2C59D /* enemyShip2.png in Resources */,
@@ -1787,6 +1778,7 @@
 				A0DB55271C87E921003C9EBC /* turbina2.plist in Resources */,
 				2C5DC7F61C88F8E7009AA62D /* FXShipBoom.mp3 in Resources */,
 				2C2AF3A01C83EF5B00D2C59D /* laserBallBlue.png in Resources */,
+				AC3041031C8B145C00F86F06 /* explosion.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

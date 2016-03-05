@@ -13,6 +13,9 @@ import Foundation
 	override func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         setupCocos2dWithOptions([CCSetupShowDebugStats: true, CCSetupScreenOrientation:CCScreenOrientationPortrait])
 
+        // Preload do plist
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFramesWithFile("explosion.plist")
+        
 		return true
 	}
 
