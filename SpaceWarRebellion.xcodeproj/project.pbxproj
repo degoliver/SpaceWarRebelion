@@ -733,7 +733,7 @@
 		ACFBEB281C8B69B700C257B9 /* config_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config_01.png; sourceTree = "<group>"; };
 		ACFBEB291C8B69B700C257B9 /* creditos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditos.png; sourceTree = "<group>"; };
 		ACFBEB2A1C8B69B700C257B9 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayHelper.swift; sourceTree = "<group>"; };
+		ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundPlayHelper.swift; path = ../Scenes/SoundPlayHelper.swift; sourceTree = "<group>"; };
 		ACFBEB311C8B6A8A00C257B9 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -774,6 +774,7 @@
 		1255542E19C09C9E00EC663C /* TSTUtils */ = {
 			isa = PBXGroup;
 			children = (
+				ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */,
 				1255543A19C0C3B100EC663C /* DelayHelper.swift */,
 				1255542F19C09C9E00EC663C /* StateMachine.swift */,
 				2C2AF38F1C83DB7800D2C59D /* Constantes.swift */,
@@ -786,7 +787,6 @@
 			isa = PBXGroup;
 			children = (
 				ACFBEB311C8B6A8A00C257B9 /* HomeScene.swift */,
-				ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */,
 				ACFBEB251C8B69A600C257B9 /* ConfigScene.swift */,
 				1255543419C09CD200EC663C /* LoadingScene.swift */,
 				1255543219C09CD200EC663C /* GameScene.swift */,
