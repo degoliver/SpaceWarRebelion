@@ -17,7 +17,7 @@ internal class Effect: CCNode {
         super.init()
         
         self.spriteExplosion = self.gerarAnimacaoSpriteWithName("", aQtdFrames: 6)
-        self.spriteExplosion?.position = CGPointMake(200, 200)
+        //self.spriteExplosion?.position = CGPointMake(200, 200)
         self.addChild(self.spriteExplosion, z: 3)
         
     }

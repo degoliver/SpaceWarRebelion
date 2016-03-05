@@ -10,6 +10,7 @@ import Foundation
 // MARK: - Class Definition
 class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegate {
     private let screenSize:CGSize = CCDirector.sharedDirector().viewSize()
+    var bossTime: Int = 60
     var canPlay:Bool = true
     var isTouching:Bool = false
     var physicsWorld:CCPhysicsNode = CCPhysicsNode()
@@ -50,7 +51,29 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
 		super.onEnter()
         DelayHelper.sharedInstance.callFunc("createEnemy", onTarget: self, withDelay: 3.0)
         DelayHelper.sharedInstance.callFunc("createAsteroid", onTarget: self, withDelay: 10.0)
+        // Registra a entrada do Boss 
+        DelayHelper.sharedInstance.callFunc("entryBoss", onTarget: self, withDelay: 1.0)
+
+        self.bossTime--
+        print(self.bossTime)
 	}
+    
+    func entryBoss(){
+        
+        self.bossTime--
+        if (self.bossTime <= 0) {
+            //entra boss
+            //Configura o BOSS
+            self.boss.visible = true
+            self.boss.position = CGPointMake(self.screenSize.width/2,800)
+            self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
+           
+        } else {
+            // Chama de 1 em 1 seg
+            DelayHelper.sharedInstance.callFunc("entryBoss", onTarget: self, withDelay: 1.0)
+        }
+        print(self.bossTime)
+    }
     
     override func update(delta: CCTime) {
         if (!canPlay) {
@@ -124,11 +147,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
         //Adciona ícones do Laser Beam.
         self.adicionaLaserBeamIcons()
-        
-        //Configura o BOSS
-        self.boss.position = CGPointMake(self.screenSize.width/2,800)
-        self.physicsWorld.addChild(self.boss,z:ObjectsLayers.Foes.rawValue)
-        //self.boss.visible = false gerar na classe BossShip
+        self.boss.visible = false
     }
     
     func loadLifeBar(){
@@ -204,10 +223,13 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         let enemySpeed:CCTime = CCTime(arc4random_uniform(6)) + 5.0 // De 5s a 10s
         inimigo.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(enemySpeed, position:CGPointMake(inimigo.position.x, inimigo.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
             inimigo.removeFromParentAndCleanup(true)
+            
         }) as! CCActionFiniteTime) as! CCAction)
         
         let delay:CCTime = (CCTime(arc4random_uniform(101)) / 100.0) + 0.5 // De 0.5s a 1.5s
-        DelayHelper.sharedInstance.callFunc("createEnemy", onTarget: self, withDelay: delay)
+        if (bossTime>=3){
+            DelayHelper.sharedInstance.callFunc("createEnemy", onTarget: self, withDelay: delay)
+        }
     }
     
     func enemyShotAtPosition(anPosition:CGPoint) {
@@ -245,7 +267,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         }) as! CCActionFiniteTime) as! CCAction)
         
         let delay:CCTime = CCTime(arc4random_uniform(21)) + 5.0 // De 20s a 25s
-        DelayHelper.sharedInstance.callFunc("createAsteroid", onTarget: self, withDelay: delay)
+        if (bossTime>=3){
+            DelayHelper.sharedInstance.callFunc("createAsteroid", onTarget: self, withDelay: delay)
+        }
     }
     
     func createParticleAtPosition(aPosition:CGPoint) {
@@ -341,6 +365,9 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                     }) as! CCActionFiniteTime) as! CCAction)
                     self.physicsWorld.addChild(item! ,z:ObjectsLayers.Foes.rawValue)
                 }
+                var explosion: Effect = Effect()
+                explosion.position = CGPointMake(anEnemyShip.position.x,anEnemyShip.position.y)
+                self.addChild(explosion, z: 3)
             }
         }
 

@@ -11,7 +11,7 @@ import UIKit
 class BossShip: CCSprite {
 
     var damage:CGFloat = 75.0
-    var life:CGFloat = 800.0
+    var life:CGFloat = 1600.0
     //var gameSceneRef:GameScene?
     var toLEft = false
     
