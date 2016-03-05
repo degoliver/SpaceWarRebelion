@@ -20,7 +20,6 @@ class PlayerShip : CCSprite {
     var shieldCount:Int = 0
     
     var laserBeamCount:Int = 0
-    var laserBeam:LaserBeam = LaserBeam()
     
     private var shield:CCSprite = CCSprite(imageNamed: "heroShield.png")
     
@@ -92,14 +91,6 @@ class PlayerShip : CCSprite {
         self.isShielded = false
         self.shield.scale = 0.0
     }
-    
-    func activateLaserBeam(){
-        if(self.laserBeamCount >= 1){
-            laserBeamCount--
-            laserBeam.activateLaserBeam(self)
-        }
-    }
-
     
     //função responsável pela geração das turbinas.
     func criaTurbinas(){

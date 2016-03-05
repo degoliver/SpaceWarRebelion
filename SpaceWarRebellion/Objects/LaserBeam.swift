@@ -7,13 +7,13 @@
 //
 
 class LaserBeam: CCNode {
-    var damage:CGFloat = 100.0
+    var damage:CGFloat = 300.0
     var gameSceneRef:GameScene?
     var laserBeam:CCParticleSystem = CCParticleSystem(file: "lazer.plist")
     
     override init() {
         super.init()
-        self.physicsBody = CCPhysicsBody(rect: CGRectMake(0.0, 0.0, 10.0, 1000.0), cornerRadius: 0.0)
+        self.physicsBody = CCPhysicsBody(rect: CGRectMake(0.0, 990, 10.0, 1000.0), cornerRadius: 0.0)
         self.physicsBody.type = CCPhysicsBodyType.Kinematic
         self.physicsBody.friction = 1.0
         self.physicsBody.elasticity = 0.1
@@ -24,6 +24,9 @@ class LaserBeam: CCNode {
         self.physicsBody.collisionMask = ["EnemyShip", "Asteroid"]
         
         self.contentSize = CGSizeMake(10.0, 1000.0)
+
+        self.laserBeam.position = CGPointMake(0.0, 0.0)
+        self.laserBeam.anchorPoint = CGPointMake(0.0, 0.0)
     }
     
     override func onEnter() {
@@ -34,19 +37,17 @@ class LaserBeam: CCNode {
         
     }
     
-    func activateLaserBeam(playerShip:PlayerShip){
-        self.laserBeam.position = CGPointMake((playerShip.boundingBox().size.width/2) - 5, (playerShip.boundingBox().size.height*4) + 60)
-        laserBeam.anchorPoint = CGPointMake(0.5, 0.0)
-        laserBeam.autoRemoveOnFinish = true
-        laserBeam.stopSystem()
-        laserBeam.resetSystem()
-        playerShip.addChild(laserBeam, z:ObjectsLayers.Player.rawValue)
+    func activateLaserBeam(gameScene:GameScene){
+        self.laserBeam.autoRemoveOnFinish = true
+        gameScene.addChild(self.laserBeam, z:ObjectsLayers.Player.rawValue)
+        self.laserBeam.resetSystem()
         DelayHelper.sharedInstance.callBlock({ () -> Void in
-            self.abc()
+                self.stopLaser()
             }, withDelay: 5.0)
     }
     
-    func abc(){
+    func stopLaser(){
         self.laserBeam.stopSystem()
+        self.laserBeam.removeFromParentAndCleanup(true)
     }
 }

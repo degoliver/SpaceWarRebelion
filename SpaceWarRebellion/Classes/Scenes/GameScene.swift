@@ -37,6 +37,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     var beamItem2:CCSprite = CCSprite(imageNamed: "laserBallBlue.png")
     var beamItem3:CCSprite = CCSprite(imageNamed: "laserBallBlue.png")
     
+    var laserBeam:LaserBeam = LaserBeam()
+    
     //boss
     var boss: BossShip = BossShip(imageNamed: "boss.png")
     
@@ -109,6 +111,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                 self.heroShip.heroFire(self)
             }
         }
+        
+        atualizaLaserBeam()
     }
 
     func createSceneObjects(){
@@ -149,6 +153,12 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         //Adciona ícones do Laser Beam.
         self.adicionaLaserBeamIcons()
         self.boss.visible = false
+        
+        //laser beam
+        self.laserBeam.position = CGPointMake(self.heroShip.position.x, 580.0)
+        self.laserBeam.anchorPoint = CGPointMake(0.5, 0.0)
+        //self.physicsWorld.addChild(self.laserBeam, z: ObjectsLayers.Shot.rawValue)
+        
     }
     
     func loadLifeBar(){
@@ -426,6 +436,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     
     //valida colisao entre laser beam e nave inimiga.
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, LaserBeam aLaserBeam: LaserBeam!, EnemyShip aEnemyShip: EnemyShip!) -> Bool {
+        aEnemyShip.color = CCColor.redColor()
+        print("BEAM!")
         if(aEnemyShip.isShielded){
             aEnemyShip.shieldLife -= aLaserBeam.damage
             
@@ -510,6 +522,11 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
     }
     
+    //atualiza posicao do laser beam;
+    func atualizaLaserBeam(){
+        self.laserBeam.position = CGPointMake(self.heroShip.position.x, 580.0)
+    }
+    
     func removeShieldIconScreen(){
         if(self.heroShip.shieldCount == 2){
             self.shieldItem3.runAction(CCActionScaleTo.actionWithDuration(0.2, scale: 0.0) as! CCAction) as CCAction
@@ -586,7 +603,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                     self.removeShieldIconScreen()
                     break
                 case UISwipeGestureRecognizerDirection.Up:
-                    self.heroShip.activateLaserBeam()
+                    self.activateLaserBeam()
                     self.removeLaserBeamIconScreen()
                     break
                 default:
@@ -594,6 +611,13 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                     break
                 }
             }
+        }
+    }
+    
+    func activateLaserBeam(){
+        if(self.heroShip.laserBeamCount >= 1){
+            self.heroShip.laserBeamCount--
+            laserBeam.activateLaserBeam(self)
         }
     }
 
