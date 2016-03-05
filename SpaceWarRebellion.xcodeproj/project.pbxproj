@@ -11,9 +11,7 @@
 		1255542319C08DC000EC663C /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255542219C08DC000EC663C /* Main.swift */; };
 		1255543019C09C9E00EC663C /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255542F19C09C9E00EC663C /* StateMachine.swift */; };
 		1255543519C09CD200EC663C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255543219C09CD200EC663C /* GameScene.swift */; };
-		1255543619C09CD200EC663C /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255543319C09CD200EC663C /* HomeScene.swift */; };
 		1255543719C09CD200EC663C /* LoadingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255543419C09CD200EC663C /* LoadingScene.swift */; };
-		1255543919C0A00E00EC663C /* SoundPlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255543819C0A00E00EC663C /* SoundPlayHelper.swift */; };
 		1255543B19C0C3B100EC663C /* DelayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1255543A19C0C3B100EC663C /* DelayHelper.swift */; };
 		1255544919C0D85B00EC663C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1255544819C0D85B00EC663C /* Images.xcassets */; };
 		1255544F19C0D90600EC663C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1255544B19C0D90600EC663C /* Default-568h@2x.png */; };
@@ -262,6 +260,13 @@
 		AC621BBC1C8B543E0040CEF0 /* boom.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC621BBA1C8B543E0040CEF0 /* boom.plist */; };
 		AC621BBD1C8B543E0040CEF0 /* lazer.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC621BBB1C8B543E0040CEF0 /* lazer.plist */; };
 		AC621BBF1C8B5A870040CEF0 /* LaserBeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC621BBE1C8B5A870040CEF0 /* LaserBeam.swift */; };
+		ACFBEB261C8B69A600C257B9 /* ConfigScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFBEB251C8B69A600C257B9 /* ConfigScene.swift */; };
+		ACFBEB2B1C8B69B700C257B9 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = ACFBEB271C8B69B700C257B9 /* back.png */; };
+		ACFBEB2C1C8B69B700C257B9 /* config_01.png in Resources */ = {isa = PBXBuildFile; fileRef = ACFBEB281C8B69B700C257B9 /* config_01.png */; };
+		ACFBEB2D1C8B69B700C257B9 /* creditos.png in Resources */ = {isa = PBXBuildFile; fileRef = ACFBEB291C8B69B700C257B9 /* creditos.png */; };
+		ACFBEB2E1C8B69B700C257B9 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = ACFBEB2A1C8B69B700C257B9 /* settings.png */; };
+		ACFBEB301C8B69F600C257B9 /* SoundPlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */; };
+		ACFBEB321C8B6A8A00C257B9 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFBEB311C8B6A8A00C257B9 /* HomeScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,9 +274,7 @@
 		1255542219C08DC000EC663C /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Main.swift; path = "Supporting Files/Main.swift"; sourceTree = "<group>"; };
 		1255542F19C09C9E00EC663C /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		1255543219C09CD200EC663C /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		1255543319C09CD200EC663C /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 		1255543419C09CD200EC663C /* LoadingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene.swift; sourceTree = "<group>"; };
-		1255543819C0A00E00EC663C /* SoundPlayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayHelper.swift; sourceTree = "<group>"; };
 		1255543A19C0C3B100EC663C /* DelayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayHelper.swift; sourceTree = "<group>"; };
 		1255544819C0D85B00EC663C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		1255544B19C0D90600EC663C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -725,6 +728,13 @@
 		AC621BBB1C8B543E0040CEF0 /* lazer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lazer.plist; sourceTree = "<group>"; };
 		AC621BBE1C8B5A870040CEF0 /* LaserBeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaserBeam.swift; sourceTree = "<group>"; };
 		ACFBEB021C8B086500C257B9 /* eject5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject5.png; sourceTree = "<group>"; };
+		ACFBEB251C8B69A600C257B9 /* ConfigScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigScene.swift; sourceTree = "<group>"; };
+		ACFBEB271C8B69B700C257B9 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		ACFBEB281C8B69B700C257B9 /* config_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config_01.png; sourceTree = "<group>"; };
+		ACFBEB291C8B69B700C257B9 /* creditos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditos.png; sourceTree = "<group>"; };
+		ACFBEB2A1C8B69B700C257B9 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayHelper.swift; sourceTree = "<group>"; };
+		ACFBEB311C8B6A8A00C257B9 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -764,7 +774,6 @@
 		1255542E19C09C9E00EC663C /* TSTUtils */ = {
 			isa = PBXGroup;
 			children = (
-				1255543819C0A00E00EC663C /* SoundPlayHelper.swift */,
 				1255543A19C0C3B100EC663C /* DelayHelper.swift */,
 				1255542F19C09C9E00EC663C /* StateMachine.swift */,
 				2C2AF38F1C83DB7800D2C59D /* Constantes.swift */,
@@ -776,8 +785,10 @@
 		1255543119C09CD200EC663C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				ACFBEB311C8B6A8A00C257B9 /* HomeScene.swift */,
+				ACFBEB2F1C8B69F600C257B9 /* SoundPlayHelper.swift */,
+				ACFBEB251C8B69A600C257B9 /* ConfigScene.swift */,
 				1255543419C09CD200EC663C /* LoadingScene.swift */,
-				1255543319C09CD200EC663C /* HomeScene.swift */,
 				1255543219C09CD200EC663C /* GameScene.swift */,
 				15EEE1811C88E7010061192E /* FirstIntroScene.swift */,
 				15EEE1831C88E72A0061192E /* SecondIntroScene.swift */,
@@ -1603,6 +1614,10 @@
 		2C2AF3781C83CBE800D2C59D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ACFBEB271C8B69B700C257B9 /* back.png */,
+				ACFBEB281C8B69B700C257B9 /* config_01.png */,
+				ACFBEB291C8B69B700C257B9 /* creditos.png */,
+				ACFBEB2A1C8B69B700C257B9 /* settings.png */,
 				AC621BBA1C8B543E0040CEF0 /* boom.plist */,
 				AC621BBB1C8B543E0040CEF0 /* lazer.plist */,
 				AC621BB41C8B4C350040CEF0 /* laserBeam.png */,
@@ -1745,14 +1760,17 @@
 				2C2AF38B1C83CBE800D2C59D /* enemyShip5.png in Resources */,
 				2C2AF3741C83CBB800D2C59D /* FXHeroLazerShot.mp3 in Resources */,
 				15EEE18B1C88E8BA0061192E /* secondIntro.png in Resources */,
+				ACFBEB2E1C8B69B700C257B9 /* settings.png in Resources */,
 				15EEE18C1C88E8BA0061192E /* thirdIntro.jpg in Resources */,
 				1226621019F00CD6001FE3B9 /* fire.png in Resources */,
 				2C5DC7F81C88FF5D009AA62D /* heroShieldIco.png in Resources */,
+				ACFBEB2B1C8B69B700C257B9 /* back.png in Resources */,
 				2C2AF3871C83CBE800D2C59D /* enemyShip.png in Resources */,
 				2C2AF3A11C83EF5B00D2C59D /* laserBallRed.png in Resources */,
 				AC621BBD1C8B543E0040CEF0 /* lazer.plist in Resources */,
 				2C22DC671C8AAECC001372F4 /* laserBeam.png in Resources */,
 				2C2AF3721C83CBB800D2C59D /* FXIntoLaserBeam.mp3 in Resources */,
+				ACFBEB2C1C8B69B700C257B9 /* config_01.png in Resources */,
 				AC621BB91C8B53680040CEF0 /* eject5.png in Resources */,
 				2C5DC7F01C88F7A3009AA62D /* boom6.plist in Resources */,
 				A0DB55301C87EAE7003C9EBC /* boss.png in Resources */,
@@ -1782,6 +1800,7 @@
 				2C2AF3881C83CBE800D2C59D /* enemyShip2.png in Resources */,
 				2C2AF3751C83CBB800D2C59D /* FXButtonTap.mp3 in Resources */,
 				1255545019C0D90600EC663C /* Default-Landscape~ipad.png in Resources */,
+				ACFBEB2D1C8B69B700C257B9 /* creditos.png in Resources */,
 				2C2AF3861C83CBE800D2C59D /* bgSpaceMain.png in Resources */,
 				2C2AF38C1C83CBE800D2C59D /* heroShip.png in Resources */,
 				2C2AF3841C83CBE800D2C59D /* asteroid.png in Resources */,
@@ -1840,11 +1859,11 @@
 				2C2AF39B1C83EBE900D2C59D /* PlayerShot.swift in Sources */,
 				1255542319C08DC000EC663C /* Main.swift in Sources */,
 				1293CDF319C08A26006A0E25 /* ccUtils.c in Sources */,
+				ACFBEB321C8B6A8A00C257B9 /* HomeScene.swift in Sources */,
 				1293CD5019C08A25006A0E25 /* CCLayoutBox.m in Sources */,
 				1293CDA919C08A25006A0E25 /* CCTexture.m in Sources */,
 				15EEE1821C88E7010061192E /* FirstIntroScene.swift in Sources */,
 				1293CDFB19C08A26006A0E25 /* CGPointExtension.m in Sources */,
-				1255543619C09CD200EC663C /* HomeScene.swift in Sources */,
 				12F88ABE19DDA1620001531E /* CCNoARC.m in Sources */,
 				1255543019C09C9E00EC663C /* StateMachine.swift in Sources */,
 				1293CD2519C08A25006A0E25 /* CCActionTween.m in Sources */,
@@ -1869,8 +1888,8 @@
 				1293CD4D19C08A25006A0E25 /* CCLayout.m in Sources */,
 				1293CD7D19C08A25006A0E25 /* CCPhysicsShape.m in Sources */,
 				1293CD0319C08A25006A0E25 /* CCRenderer.m in Sources */,
-				1255543919C0A00E00EC663C /* SoundPlayHelper.swift in Sources */,
 				1293CD9819C08A25006A0E25 /* CCSprite.m in Sources */,
+				ACFBEB301C8B69F600C257B9 /* SoundPlayHelper.swift in Sources */,
 				1255543719C09CD200EC663C /* LoadingScene.swift in Sources */,
 				1293CE2019C08A26006A0E25 /* OALAudioTrack.m in Sources */,
 				1293CE6119C08A26006A0E25 /* NSMutableDictionary+WeakReferences.m in Sources */,
@@ -1943,6 +1962,7 @@
 				1293CD3719C08A25006A0E25 /* CCDirector.m in Sources */,
 				1293CD1519C08A25006A0E25 /* CCActionEase.m in Sources */,
 				1293CE4219C08A26006A0E25 /* ALSoundSourcePool.m in Sources */,
+				ACFBEB261C8B69A600C257B9 /* ConfigScene.swift in Sources */,
 				1293CE8D19C08A26006A0E25 /* CCBKeyframe.m in Sources */,
 				1293CD4319C08A25006A0E25 /* CCLabelBMFont.m in Sources */,
 				1293CE3219C08A26006A0E25 /* ALCaptureDevice.m in Sources */,
