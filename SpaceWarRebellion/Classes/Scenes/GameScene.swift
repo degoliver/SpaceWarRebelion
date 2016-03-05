@@ -51,11 +51,12 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
 		super.onEnter()
         DelayHelper.sharedInstance.callFunc("createEnemy", onTarget: self, withDelay: 3.0)
         DelayHelper.sharedInstance.callFunc("createAsteroid", onTarget: self, withDelay: 10.0)
+        
         // Registra a entrada do Boss 
-        DelayHelper.sharedInstance.callFunc("entryBoss", onTarget: self, withDelay: 1.0)
+        //DelayHelper.sharedInstance.callFunc("entryBoss", onTarget: self, withDelay: 1.0)
 
-        self.bossTime--
-        print(self.bossTime)
+        //self.bossTime--
+        //print(self.bossTime)
 	}
     
     func entryBoss(){
@@ -364,7 +365,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
                     }) as! CCActionFiniteTime) as! CCAction)
                     self.physicsWorld.addChild(item ,z:ObjectsLayers.Foes.rawValue)
                 }
-                var explosion: Effect = Effect()
+                let explosion: Effect = Effect()
                 explosion.position = CGPointMake(anEnemyShip.position.x,anEnemyShip.position.y)
                 self.addChild(explosion, z: 3)
             }
@@ -398,13 +399,6 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         return  true
     }
     
-    //valida colisão entre tiro do heroi e tiro inimigo
-//    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, EnemyShot aEnemyShot: EnemyShot!) -> Bool {
-//        aPlayerShot.removeFromParentAndCleanup(true)
-//        aEnemyShot.removeFromParentAndCleanup(true)
-//        return true
-//    }
-    
     //valida colisao entre asteroid e tiro do heroi
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, Asteroid aAsteroid: Asteroid!, PlayerShot aPlayerShot: PlayerShot!) -> Bool {
         aAsteroid.life -= aPlayerShot.damage
@@ -427,6 +421,39 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         
         aPlayerShot.removeFromParentAndCleanup(true)
         
+        return true
+    }
+    
+    //valida colisao entre laser beam e nave inimiga.
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, LaserBeam aLaserBeam: LaserBeam!, EnemyShip aEnemyShip: EnemyShip!) -> Bool {
+        if(aEnemyShip.isShielded){
+            aEnemyShip.shieldLife -= aLaserBeam.damage
+            
+            if(aEnemyShip.shieldLife <= 0){
+                aEnemyShip.removeShield()
+            }
+        }else{
+            aEnemyShip.life -= aLaserBeam.damage
+            
+            if (aEnemyShip.life <= 0 && !aEnemyShip.isDead) {
+                aEnemyShip.isDead = true
+                SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
+                self.createParticleAtPosition(aEnemyShip.position)
+                aEnemyShip.removeFromParentAndCleanup(true)
+                
+                if(aEnemyShip.enemyType == 5 && arc4random_uniform(10) <= 3){
+                    let item:Item = Item(imageNamed: "heroShieldIco.png")
+                    item.type = "shield"
+                    item.position = aEnemyShip.position
+                    item.runAction(CCActionSequence.actionOne(CCActionMoveTo.actionWithDuration(3.0, position:CGPointMake(item.position.x, item.boundingBox().size.height * -2)) as! CCActionFiniteTime, two: CCActionCallBlock.actionWithBlock({ _ in
+                    }) as! CCActionFiniteTime) as! CCAction)
+                    self.physicsWorld.addChild(item ,z:ObjectsLayers.Foes.rawValue)
+                }
+                let explosion: Effect = Effect()
+                explosion.position = CGPointMake(aEnemyShip.position.x,aEnemyShip.position.y)
+                self.addChild(explosion, z: 3)
+            }
+        }
         return true
     }
     
@@ -505,26 +532,21 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
     
     //valida colisao entre a o tiro da nave e o Boss
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, PlayerShot aPlayerShot: PlayerShot!, BossShip boss:BossShip!) -> Bool {
-        var explosion: Effect = Effect()
         boss.life -= aPlayerShot.damage
         
+        SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
         if boss.life <= 0{
             boss.life = 0
-            
             // boss desaparece
             boss.removeFromParentAndCleanup(true)
         }else{
-            // alteracoes do boss
-            SoundPlayHelper.sharedInstance.playSoundWithControl(GameMusicAndSoundFx.ShipBoom)
-            explosion.position = CGPointMake(aPlayerShot.position.x,aPlayerShot.position.y)
-            explosion.scale = 0.5
-            self.addChild(explosion, z: 10)
+            // mudar a cor do boss
         }
         aPlayerShot.removeFromParentAndCleanup(true)
-    
+        
         return true
     }
-    
+
     func updateHeroLife(lifeHero:CGFloat){
         if(lifeHero <= 75.0 && lifeHero > 50.0){
             heroLife100.removeFromParentAndCleanup(true)
@@ -549,7 +571,7 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
         CCDirector.sharedDirector().view.addGestureRecognizer(swipDowm)
         
         let swipUp: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handlePlayerSwipe:")
-        swipUp.direction = UISwipeGestureRecognizerDirection.Down
+        swipUp.direction = UISwipeGestureRecognizerDirection.Up
         swipUp.delegate = self
         CCDirector.sharedDirector().view.addGestureRecognizer(swipUp)
     }
@@ -560,11 +582,8 @@ class GameScene: CCScene, CCPhysicsCollisionDelegate, UIGestureRecognizerDelegat
             if(recognizer.state == .Ended){
                 switch(recognizer.direction){
                 case UISwipeGestureRecognizerDirection.Down:
-//                    self.heroShip.activeShield()
-//                    self.removeShieldIconScreen()
-                    
-                    self.heroShip.activateLaserBeam()
-                    self.removeLaserBeamIconScreen()
+                    self.heroShip.activeShield()
+                    self.removeShieldIconScreen()
                     break
                 case UISwipeGestureRecognizerDirection.Up:
                     self.heroShip.activateLaserBeam()

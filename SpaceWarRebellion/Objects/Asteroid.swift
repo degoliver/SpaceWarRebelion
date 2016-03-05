@@ -34,7 +34,7 @@ class Asteroid: CCNode {
         self.physicsBody.density = 100.0
         self.physicsBody.collisionType = "Asteroid"
         self.physicsBody.collisionCategories = ["Asteroid"]
-        self.physicsBody.collisionMask = ["PlayerShip", "PlayerShot"]
+        self.physicsBody.collisionMask = ["PlayerShip", "PlayerShot", "LaserBeam"]
         
         self.contentSize = asteroid.boundingBox().size
 
